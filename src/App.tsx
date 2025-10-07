@@ -2,19 +2,14 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import { Routes, Route, Link } from 'react-router-dom';
+
+import Default from './pages/landing/Landing';
+import Home from './pages/home/Home';
+import Chat from './pages/chat/Chat';
+
 import './App.css'
 
-function Home() {
-  return <h1 className="text-3xl font-bold">Home Page</h1>;
-}
 
-function About() {
-  return <h1 className="text-3xl font-bold">About Page</h1>;
-}
-
-function Contact() {
-  return <h1 className="text-3xl font-bold">Contact Page</h1>;
-}
 
 export default function App() {
   return (
@@ -26,9 +21,10 @@ export default function App() {
       </nav>
 
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
+        <Route path="/" element={<Default />} />
+        {/* <Route path="/login" element={<Login />} /> */} // Redirect to AWS login
+        <Route path="/home" element={<Home />} />
+        <Route path="/chat" element={<Chat />} />
       </Routes>
     </div>
   );
