@@ -10,4 +10,8 @@ export default defineConfig({
       },
     }),
   ],
+  server: {
+    host: true, // allows access from other devices on the same network
+    port: 5173, // optional: fixed port
+  },
 })
