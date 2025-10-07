@@ -13,13 +13,13 @@ import './App.css'
 
 export default function App() {
   return (
-    <div>
+    <>
       <Routes>
         <Route path="/" element={<Default />} />
         {/* <Route path="/login" element={<Login />} /> */} // Redirect to AWS login
         <Route path="/home" element={<Home />} />
         <Route path="/chat" element={<Chat />} />
       </Routes>
-    </div>
+    </>
   );
 }
