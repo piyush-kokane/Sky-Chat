@@ -6,6 +6,32 @@
     overflow: hidden; /* Prevent page scroll */
 }
 
+.home-pg .header {
+    height: 64px;
+    padding: 16px 24px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+    background-color: #202c33;
+
+    span {
+        display: flex;
+        flex-direction: row;
+        flex: 1;
+    }
+
+    h1,h2 {
+        font-size: 32px;
+        font-weight: bolder;
+        font-family: 'M PLUS Rounded 1c', sans-serif;
+    }
+
+    h1 {
+        color: aqua;
+    }
+}
+
 .home-bg {
     position: absolute;
     height: 100%;

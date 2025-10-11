@@ -34,6 +34,15 @@ function Home() {
     <div className="home-pg">
       <div className="home-bg" />
 
+
+      <div className="header">
+        <span> <h1>Sky</h1> <h2>Chat</h2> </span>
+
+        <p>☀︎</p>
+        <p>︙</p>
+      </div>
+
+
       <div className="chat-list">
         {chatUsers.map((user, index) => (
           <ChatItem
