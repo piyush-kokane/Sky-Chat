@@ -21,6 +21,7 @@
 .chat-list {
   display: flex;
   flex-direction: column;
-  gap: 2px; /* spacing between chat items */
-  overflow-y: auto; /* scroll if too many items */
+  gap: 2px;
+  padding: 10px 8px;
+  overflow-y: auto;
 }

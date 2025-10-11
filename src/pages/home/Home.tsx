@@ -4,41 +4,26 @@ import './Home.css'
 
 
 const chatUsers = [
-  {
-    userImage: "https://chat-portfolio-dhanushnehru.netlify.app/images/dp.jpg",
-    userName: "Piyush Kokane",
-    userText: "Last seen on MondayLast seen on MondayLast seen on MondayLast seen on MondayLast seen on MondayLast seen on MondayLast seen on MondayLast seen on MondayLast seen on MondayLast seen on MondayLast seen on MondayLast seen on MondayLast seen on MondayLast seen on MondayLast seen on Monday",
-    userTime: "Today",
-    messageCount: 1,
-  },
-  {
-    userImage: "https://chat-portfolio-dhanushnehru.netlify.app/images/dp.jpg",
-    userName: "Dhanush Nehru",
-    userText: "Typing...",
-    userTime: "12:15 pm",
-    messageCount: 3,
-  },
-  {
-    userImage: "https://chat-portfolio-dhanushnehru.netlify.app/images/dp.jpg",
-    userName: "Sarah Lee",
-    userText: "Sent a photo",
-    userTime: "Yesterday",
-    messageCount: 2,
-  },
-  {
-    userImage: "https://chat-portfolio-dhanushnehru.netlify.app/images/dp.jpg",
-    userName: "John Doe",
-    userText: "Online",
-    userTime: "10:30 am",
-    messageCount: 0,
-  },
-  {
-    userImage: "https://chat-portfolio-dhanushnehru.netlify.app/images/dp.jpg",
-    userName: "Jane Smith",
-    userText: "Last seen 2 days ago",
-    userTime: "09:45 am",
-    messageCount: 5,
-  },
+  { userImage: "https://chat-portfolio-dhanushnehru.netlify.app/images/dp.jpg", userName: "Piyush Kokane", userText: "Last seen on Monday", userTime: "Today", messageCount: 1 },
+  { userImage: "https://chat-portfolio-dhanushnehru.netlify.app/images/dp.jpg", userName: "Dhanush Nehru", userText: "Typing...", userTime: "12:15 pm", messageCount: 3 },
+  { userImage: "https://chat-portfolio-dhanushnehru.netlify.app/images/dp.jpg", userName: "Sarah Lee", userText: "Sent a photo", userTime: "Yesterday", messageCount: 2 },
+  { userImage: "https://chat-portfolio-dhanushnehru.netlify.app/images/dp.jpg", userName: "John Doe", userText: "Online", userTime: "10:30 am", messageCount: 0 },
+  { userImage: "https://chat-portfolio-dhanushnehru.netlify.app/images/dp.jpg", userName: "Jane Smith", userText: "Last seen 2 days ago", userTime: "09:45 am", messageCount: 5 },
+  { userImage: "https://chat-portfolio-dhanushnehru.netlify.app/images/dp.jpg", userName: "Michael Brown", userText: "Sent a video", userTime: "Yesterday", messageCount: 1 },
+  { userImage: "https://chat-portfolio-dhanushnehru.netlify.app/images/dp.jpg", userName: "Emily Davis", userText: "Typing...", userTime: "11:20 am", messageCount: 4 },
+  { userImage: "https://chat-portfolio-dhanushnehru.netlify.app/images/dp.jpg", userName: "William Johnson", userText: "Hello!", userTime: "Today", messageCount: 0 },
+  { userImage: "https://chat-portfolio-dhanushnehru.netlify.app/images/dp.jpg", userName: "Olivia Martinez", userText: "Sent a sticker", userTime: "09:00 am", messageCount: 2 },
+  { userImage: "https://chat-portfolio-dhanushnehru.netlify.app/images/dp.jpg", userName: "James Wilson", userText: "Last seen 3 days ago", userTime: "Yesterday", messageCount: 1 },
+  { userImage: "https://chat-portfolio-dhanushnehru.netlify.app/images/dp.jpg", userName: "Sophia Taylor", userText: "Online", userTime: "08:30 am", messageCount: 0 },
+  { userImage: "https://chat-portfolio-dhanushnehru.netlify.app/images/dp.jpg", userName: "Benjamin Anderson", userText: "Sent a photo", userTime: "Yesterday", messageCount: 3 },
+  { userImage: "https://chat-portfolio-dhanushnehru.netlify.app/images/dp.jpg", userName: "Mia Thomas", userText: "Typing...", userTime: "10:15 am", messageCount: 2 },
+  { userImage: "https://chat-portfolio-dhanushnehru.netlify.app/images/dp.jpg", userName: "Alexander Moore", userText: "Hello!", userTime: "Today", messageCount: 0 },
+  { userImage: "https://chat-portfolio-dhanushnehru.netlify.app/images/dp.jpg", userName: "Charlotte Harris", userText: "Sent a document", userTime: "Yesterday", messageCount: 1 },
+  { userImage: "https://chat-portfolio-dhanushnehru.netlify.app/images/dp.jpg", userName: "Daniel Clark", userText: "Last seen 1 hour ago", userTime: "Today", messageCount: 5 },
+  { userImage: "https://chat-portfolio-dhanushnehru.netlify.app/images/dp.jpg", userName: "Amelia Lewis", userText: "Online", userTime: "11:50 am", messageCount: 0 },
+  { userImage: "https://chat-portfolio-dhanushnehru.netlify.app/images/dp.jpg", userName: "Ethan Robinson", userText: "Sent a voice note", userTime: "Yesterday", messageCount: 2 },
+  { userImage: "https://chat-portfolio-dhanushnehru.netlify.app/images/dp.jpg", userName: "Harper Walker", userText: "Typing...", userTime: "10:05 am", messageCount: 3 },
+  { userImage: "https://chat-portfolio-dhanushnehru.netlify.app/images/dp.jpg", userName: "Logan Hall", userText: "Hello there!", userTime: "Today", messageCount: 0 },
 ];
 
 
