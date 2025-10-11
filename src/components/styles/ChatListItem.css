@@ -1,6 +1,6 @@
 .chat-item {
     height: auto;
-    width: 100%;
+    flex: 1;
     padding: 10px 16px;
     display: flex;
     flex-direction: row;
@@ -13,7 +13,7 @@
 }
 
 .chat-item.style-list {
-    background-color: #90909030;
+    /* background-color: #90909030; */
     border-radius: 10px;
 }
 
@@ -44,15 +44,17 @@
 }
 
 .chat-info {
-    width: 100%;
-    height: fit-content;
     display: flex;
-    gap: 4px;
     flex-direction: column;
+    height: fit-content;
+    flex: 1;
+    gap: 4px;
     text-align: start;
+    overflow: hidden;
 
     div {
         display: flex;
+        flex: 1;
         gap: 6px;
         flex-direction: row;
     }
@@ -60,19 +62,26 @@
     h1 {
         font-size: 16px;
         font-weight: 500;
-        width: 100%;
+        flex: 1;
         color: #ffffff;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     h2 {
         font-size: 12px;
         color: #ffffff99;
+        white-space: nowrap;
     }
 
     h3 {
         font-size: 13px;
-        width: 100%;
+        flex: 1;
         color: #ffffff99;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     h4 {

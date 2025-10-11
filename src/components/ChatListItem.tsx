@@ -9,7 +9,7 @@ interface ChatListItemProps {
   userName: string;
   userText: string;
   userTime: string;
-  messageCount: string;
+  messageCount: number;
 }
 
 
@@ -46,7 +46,7 @@ function ChatListItem({
         </div>
         <div>
           <h3>{userText}</h3>
-          {!header && <h4>{messageCount}</h4> }
+          {(!header && messageCount > 0) && <h4>{(messageCount<=99 ? messageCount : "99+")}</h4> }
         </div>
       </div>
     </div>

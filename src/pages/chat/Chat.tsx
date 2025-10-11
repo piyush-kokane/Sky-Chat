@@ -11,7 +11,7 @@ const userData = {
   userName: "Piyush Kokane",
   userText: "Last seen on Monday",
   userTime: "Today",
-  messageCount: "1",
+  messageCount: 1,
 };
 
 const messages = [
@@ -36,6 +36,7 @@ const messages = [
   { received: true, text: "Good night!", time: "7:18 pm" },
   { received: false, text: "Good night 😴", time: "7:19 pm" },
 ];
+
 
 
 function Chat() {

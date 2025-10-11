@@ -1,0 +1,26 @@
+.home-pg {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Prevent page scroll */
+}
+
+.home-bg {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: #90909050;
+    background-image: url("@assets/chat-bg.png");
+    background-position: center;
+    background-size: 60%;
+    opacity: 0.03;
+    z-index: -10;
+}
+
+.chat-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px; /* spacing between chat items */
+  overflow-y: auto; /* scroll if too many items */
+}
