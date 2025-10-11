@@ -38,9 +38,42 @@
 }
 
 .message-bar-container {
-    height: 54px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    height: auto;
     margin: 12px 16px;
     margin-top: 0px;
-    border-radius: 10px;
+    padding: 5px;
+    border-radius: 15px;
     background-color: rgb(45, 45, 45);
+}
+
+.message-input {
+    flex: 1;
+    padding: 10px 14px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    resize: none;
+    overflow-y: auto;
+    height: auto;
+    max-height: 150px;
+    min-height: 46px;
+    line-height: 1.4;
+}
+
+.send-message {
+    height: 50px;
+    padding: 12px;
+    aspect-ratio: 1/1;
+    border-radius: 12px;
+    background-color: #25D366;
+    transition: transform 0.15s ease, background 0.2s ease;
+    cursor: pointer;
+
+    &:hover{
+        transform: scale(0.95);
+        background-color: #1e9f4d;
+    }
 }
