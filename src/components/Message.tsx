@@ -23,7 +23,7 @@ function Message({
       <p className="text">{text}</p>
       <div className="footer">
         <p className="time">{time}</p>
-        <p className="tick">✓</p>
+        <p className="tick">✔</p>
       </div>
     </div>
   );

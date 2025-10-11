@@ -36,7 +36,7 @@
   white-space: pre-wrap;
 }
 
-.message-container .time {
-
+.message-container .tick {
+    color: aqua;
 }
 
