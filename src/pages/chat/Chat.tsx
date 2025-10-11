@@ -13,12 +13,20 @@ const userData = {
   messageCount: "1",
 };
 
+const messages = [
+  { received: true, text: "Hello worldworldworldworldworldworldworldworldworldworldworldworldworldworldworldworldworldworldworldworldworldworldworldworldworldworldworldworldworldworldworldworldworldworldworldworld", time: "7:15 pm" },
+  { received: false, text: "Hi! How are you?", time: "7:16 pm" },
+  { received: true, text: "I am good, thanks!", time: "7:17 pm" },
+  { received: false, text: "Great 😊", time: "7:18 pm" },
+];
+
 function Chat() {
 
 
   return (
     <div className="chats-pg">
       <div className="chat-bg" />
+
 
       <div className="header">
         <ChatItem
@@ -36,57 +44,16 @@ function Chat() {
       
 
       <div className="chat-container">
-        <MessageItem/>
-        <MessageItem/>
-        <MessageItem/>
-        <MessageItem/>
-        <MessageItem/>
-        <MessageItem/>
-        <MessageItem/>
-        <MessageItem/>
-        <MessageItem/>
-        <MessageItem/>
-        <MessageItem/>
-        <MessageItem/>
-        <MessageItem/>
-        <MessageItem/>
-        <MessageItem/>
-        <MessageItem/>
-        <MessageItem/>
-        <MessageItem/>
-        <MessageItem/>
-        <MessageItem/>
-        <MessageItem/>
-        <MessageItem/>
-        <MessageItem/>
-        <MessageItem/>
-        <MessageItem/>
-        <MessageItem/>
-        <MessageItem/>
-        <MessageItem/>
-        <MessageItem/>
-        <MessageItem/>
-        <MessageItem/>
-        <MessageItem/>
-        <MessageItem/>
-        <MessageItem/>
-        <MessageItem/>
-        <MessageItem/>
-        <MessageItem/>
-        <MessageItem/>
-        <MessageItem/>
-        <MessageItem/>
-        <MessageItem/>
-        <MessageItem/>
-        <MessageItem/>
-        <MessageItem/>
-        <MessageItem/>
-        <MessageItem/>
-        <MessageItem/>
-        <MessageItem/>
-        <MessageItem/>
-        <MessageItem/>
+        {messages.map((message, index) => (
+          <MessageItem
+            key={index}
+            received={message.received}
+            text={message.text}
+            time={message.time}
+          />
+        ))}
       </div>
+
 
       <div className="message-bar-container">
         <div className="message-bar">
@@ -96,7 +63,7 @@ function Chat() {
       
         </div>
       </div>
-
+      
       
     </div>
   );

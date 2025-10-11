@@ -1,36 +1,41 @@
 .message-container {
-  display: inline-flex;
+  display: flex;
   flex-direction: column;
   align-items: flex-end;
-  background-color: #005c4b; /* WhatsApp-style green bubble */
+  background-color: #075e54;
   color: white;
-  max-width: 60%;
-  padding: 10px 14px;
-  border-radius: 12px 12px 0 12px;
-  align-self: flex-end; /* align to right side */
+  max-width: clamp(0px, 80%, 800px);
+  padding: 8px 10px;
+  border-radius: 10px;
+  align-self: flex-end;
   position: relative;
-  animation: fadeIn 0.2s ease-in;
 }
 
 .message-container.received {
-  background-color: #075e54;
   align-self: flex-start;
-  border-radius: 12px 12px 12px 0;
+  background-color: #262d31;
 }
 
-/* Message text */
-.message-container .Text {
-  font-size: 15px;
-  line-height: 1.4;
-  margin: 0;
-  word-wrap: break-word;
-}
-
-/* Time label */
-.message-container .Time {
+.message-container .footer {
+  display: flex;
+  flex-direction: row;
+  gap: 6px;
   font-size: 11px;
   opacity: 0.7;
+    align-self: flex-end;
   margin-top: 4px;
-  align-self: flex-end;
+}
+
+.message-container .text {
+  font-size: 15px;
+  line-height: 1.4;
+  text-align: left;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+.message-container .time {
+
 }
 

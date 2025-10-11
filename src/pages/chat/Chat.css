@@ -28,7 +28,6 @@
 }
 
 .chat-container {
-    height: calc(100vh - 64px - 60px); /* chats-pg:height - header:height - message-bar:height */
     display: flex;
     flex-direction: column;
     gap: 2px;
@@ -39,9 +38,9 @@
 }
 
 .message-bar-container {
-    height: 60px;
-    margin: 12px;
+    height: 54px;
+    margin: 12px 16px;
     margin-top: 0px;
     border-radius: 10px;
-    background-color: #202c33;
+    background-color: rgb(45, 45, 45);
 }
