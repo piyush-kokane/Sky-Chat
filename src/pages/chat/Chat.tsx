@@ -18,6 +18,8 @@ function Chat() {
 
   return (
     <div className="chats-pg">
+      <div className="chat-bg" />
+
       <div className="header">
         <ChatItem
           header={true}
@@ -33,26 +35,69 @@ function Chat() {
       </div>
       
 
-      <div className="chat-section">
-        <div className="chat-bg" />
+      <div className="chat-container">
+        <MessageItem/>
+        <MessageItem/>
+        <MessageItem/>
+        <MessageItem/>
+        <MessageItem/>
+        <MessageItem/>
+        <MessageItem/>
+        <MessageItem/>
+        <MessageItem/>
+        <MessageItem/>
+        <MessageItem/>
+        <MessageItem/>
+        <MessageItem/>
+        <MessageItem/>
+        <MessageItem/>
+        <MessageItem/>
+        <MessageItem/>
+        <MessageItem/>
+        <MessageItem/>
+        <MessageItem/>
+        <MessageItem/>
+        <MessageItem/>
+        <MessageItem/>
+        <MessageItem/>
+        <MessageItem/>
+        <MessageItem/>
+        <MessageItem/>
+        <MessageItem/>
+        <MessageItem/>
+        <MessageItem/>
+        <MessageItem/>
+        <MessageItem/>
+        <MessageItem/>
+        <MessageItem/>
+        <MessageItem/>
+        <MessageItem/>
+        <MessageItem/>
+        <MessageItem/>
+        <MessageItem/>
+        <MessageItem/>
+        <MessageItem/>
+        <MessageItem/>
+        <MessageItem/>
+        <MessageItem/>
+        <MessageItem/>
+        <MessageItem/>
+        <MessageItem/>
+        <MessageItem/>
+        <MessageItem/>
+        <MessageItem/>
+      </div>
 
-        <div className="chat-container">
-          <MessageItem/>
-          <MessageItem/>
-          <MessageItem/>
-        </div>
-
-        <div className="message-bar-container">
-          <div className="message-bar">
-          
-          </div>
-          <div className="send-message">
+      <div className="message-bar-container">
+        <div className="message-bar">
         
-          </div>
+        </div>
+        <div className="send-message">
+      
         </div>
       </div>
 
-
+      
     </div>
   );
 }

@@ -12,7 +12,7 @@ function Message() {
 
 
   return (
-    <div className="message-container">
+    <div className="message-container received">
       <p className="Text">{message.text}</p>
       <p className="Time">{message.time}</p>
     </div>
