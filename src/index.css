@@ -68,3 +68,21 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+/* WebKit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #444444aa;
+  border-radius: 8px;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #444444aa transparent;
+}

@@ -13,7 +13,7 @@
     flex-direction: row;
     align-items: center;
     gap: 4px;
-    background-color: #202c33;
+    background-color: rgb(32, 46, 54);
 
     span {
         display: flex;
@@ -28,7 +28,7 @@
     }
 
     h1 {
-        color: aqua;
+        color: rgb(58, 149, 254);
     }
 }
 
