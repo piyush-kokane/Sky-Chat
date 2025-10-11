@@ -1,80 +1,46 @@
-.header-chats-pg {
-    width: 100%;
-    background-color: #202c33;
+.chats-pg {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
-.profile-cmp {
-    height: auto;
-    padding: 10px 16px;
+.chats-pg .header {
+    height: 64px;
+    padding-right: 16px;
     display: flex;
     flex-direction: row;
-    gap: 16px;
     align-items: center;
-    background-color: #90909030;
-    border-radius: 10px;
-}
-
-.profile-icon {
-    height: 40px;
-    aspect-ratio: 1/1;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-.profile-info {
-    width: 100%;
-    height: fit-content;
-    display: flex;
     gap: 4px;
-    flex-direction: column;
-    text-align: start;
-
-    div {
-        display: flex;
-        gap: 6px;
-        flex-direction: row;
-    }
-
-    h1 {
-        font-size: 16px;
-        font-weight: 500;
-        width: 100%;
-        color: #ffffff;
-    }
-
-    h2 {
-        font-size: 12px;
-        color: #ffffff99;
-    }
-
-    h3 {
-        font-size: 13px;
-        width: 100%;
-        color: #ffffff99;
-    }
-
-    h4 {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        height: 22px;
-        min-width: 22px;
-        font-size: 12px;
-        font-weight: 600;
-        padding: 2px 6px;
-        background-color: #21c063;
-        border-radius: 11px;
-        color: #0A0A0A
-    }
-}
-
-.chats-container {
-    height: calc(100% - 60px - 62px);
-    width: 100%;
-}
-
-.message-container {
-    height: 60px;
-    width: 100%;
     background-color: #202c33;
+}
+
+.chat-section {
+    position: relative;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-bg {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-image: url("@assets/chat-bg.png");
+    background-position: center;
+    background-size: 80%;
+    opacity: 0.05;
+    z-index: 0;
+}
+
+.chat-container {
+  flex: 1;
+  overflow-y: hidden;
+  padding: 10px;
+}
+
+.message-bar-container {
+    height: 60px;
+    background-color: #202c33;
+    
 }
