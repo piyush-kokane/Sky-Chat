@@ -31,20 +31,31 @@ function ChatListItem({
   
 
   return (
-    <div className={`chat-item ${header ? "style-header" : "style-list"}`}>
+    <div 
+      className={`chat-item ${header ? "style-header" : "style-list"}`}
+      onClick={() => {if (!header) navigate("/chat")}}
+    >
+
       {header &&
         <div className="back" onClick={() => navigate("/home")}>
           <p>❮❮</p>
         </div>
       }
 
-      <img
+      
+      <div
         className={`chat-icon ${header ? "style-header" : "style-list"}`}
-        src={imgError ? fallbackImg : userImage}
-        alt="DP"
-        onError={() => setImgError(true)}
         onClick={onIconClick}
-      />
+      >
+        <img
+          src={imgError ? fallbackImg : userImage}
+          alt="DP"
+          onError={() => setImgError(true)}
+        />
+
+        <span className="material-symbols-rounded">delete</span>
+      </div>
+
 
       <div className="chat-info">
         <div>
@@ -56,6 +67,7 @@ function ChatListItem({
           {(!header && messageCount > 0) && <h4>{(messageCount<=99 ? messageCount : "99+")}</h4> }
         </div>
       </div>
+      
     </div>
   );
 }

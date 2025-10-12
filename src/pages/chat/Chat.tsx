@@ -44,7 +44,7 @@ function Chat() {
   const [imgError, setImgError] = useState(false);
 
 
-  const [showDp, setShowDp] = useState(true);
+  const [showDp, setShowDp] = useState(false);
   function toggleDp(){
     showDp
     ? setShowDp(false)

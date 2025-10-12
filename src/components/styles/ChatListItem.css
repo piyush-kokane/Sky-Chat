@@ -32,12 +32,34 @@
     }
 }
 
-
 .chat-icon {
+    position: relative;
     aspect-ratio: 1/1;
-    border-radius: 50%;
-    object-fit: cover;
     cursor: pointer;
+
+    img, span {
+        border-radius: 50%;
+        height: 100%;
+        width: 100%;
+    }
+
+    img {
+        object-fit: cover;
+    }
+
+    span {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: red;
+        color: white;
+        opacity: 0;
+        transition: opacity 0.1s ease;
+    }
+
+
 }
 
 .chat-icon.style-header {
@@ -46,6 +68,10 @@
 
 .chat-icon.style-list {
     height: 50px;
+    
+    &:hover span {
+        opacity: 1;
+    }
 }
 
 .chat-info {
