@@ -15,7 +15,7 @@
     gap: 4px;
     background-color: rgb(32, 46, 54);
 
-    span {
+    p {
         display: flex;
         flex-direction: row;
         flex: 1;
@@ -29,6 +29,35 @@
 
     h1 {
         color: rgb(58, 149, 254);
+    }
+
+    span {
+        cursor: pointer;
+        font-size: 26px;
+        border-radius: 50%;
+        padding: 6px;
+
+        &:hover {
+            background-color: #90909030;
+        }
+    }
+}
+
+.home-pg .footer {
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
+    font-size: 12px;
+    margin: 32px 0;
+    align-self: center;
+    align-items: center;
+
+    span {
+        font-size: 12px;
+    }
+
+    p:nth-of-type(2) {
+        color: #21c063;
     }
 }
 

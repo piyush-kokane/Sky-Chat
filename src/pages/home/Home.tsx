@@ -36,10 +36,10 @@ function Home() {
 
 
       <div className="header">
-        <span> <h1>Sky</h1> <h2>Chat</h2> </span>
+        <p> <h1>Sky</h1> <h2>Chat</h2> </p>
 
-        <p>☀︎</p>
-        <p>︙</p>
+        <span className="material-symbols-rounded">wb_sunny</span>
+        <span className="material-symbols-outlined">more_vert</span>
       </div>
 
 
@@ -55,6 +55,13 @@ function Home() {
             messageCount={user.messageCount}
           />
         ))}
+
+        <div className="footer">
+          <span className="material-symbols-outlined">lock</span>
+          <p>Your personal messages are</p>
+          <p>end-to-end encrypted</p>
+        </div>
+
       </div>
     </div>
   );
