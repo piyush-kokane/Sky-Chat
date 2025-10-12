@@ -27,7 +27,10 @@ function Landing() {
 
       <div className="btn-container">
         <button onClick={handleSignin}>Sign in</button>
-        <button onClick={handleSignup}>Sign up</button>
+        <div>
+          <button onClick={handleSignup}>Sign up</button>
+          <p>*Creat Account</p>
+        </div>
       </div>
     </div>
   );
