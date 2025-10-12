@@ -1,4 +1,5 @@
 import {  useState, useRef, useEffect  } from "react";
+import fallbackImg from "@assets/default-user.png"; // fallback image
 import sendImg from "@assets/send-btn.svg";
 import ChatItem from '@components/ChatListItem'
 import MessageItem from '@components/Message'
@@ -39,7 +40,18 @@ const messages = [
 
 
 
-function Chat() {
+function Chat() { 
+  const [imgError, setImgError] = useState(false);
+
+
+  const [showDp, setShowDp] = useState(true);
+  function toggleDp(){
+    showDp
+    ? setShowDp(false)
+    : setShowDp(true)
+  }
+
+
   const [message, setMessage] = useState("");
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -66,12 +78,26 @@ function Chat() {
           userText={userData.userText}
           userTime={userData.userTime}
           messageCount={userData.messageCount}
+          onIconClick={toggleDp}
         />
 
-        <p>☀︎</p>
-        <p>︙</p>
+        <span className="material-symbols-rounded">wb_sunny</span>
+        <span className="material-symbols-outlined">more_vert</span>
       </div>
-      
+
+
+      {showDp &&
+        <div className="dp-display-container">
+          <div>
+            <img
+              src={imgError ? fallbackImg : userData.userImage}
+              alt="DP"
+              onError={() => setImgError(true)}
+            />
+            <span onClick={toggleDp} className="material-symbols-rounded">close</span>
+          </div>
+        </div>
+      }
 
       <div className="chat-container">
         {messages.map((message, index) => (

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import fallbackImg from "@assets/default-user.png"; // fallback image
 import './styles/ChatListItem.css'
 
@@ -10,6 +11,7 @@ interface ChatListItemProps {
   userText: string;
   userTime: string;
   messageCount: number;
+  onIconClick?: () => void;
 }
 
 
@@ -20,14 +22,18 @@ function ChatListItem({
   userText,
   userTime,
   messageCount,
+  onIconClick,
 }: ChatListItemProps) {
+
+  const navigate = useNavigate();
+
   const [imgError, setImgError] = useState(false);
   
 
   return (
     <div className={`chat-item ${header ? "style-header" : "style-list"}`}>
       {header &&
-        <div className="back">
+        <div className="back" onClick={() => navigate("/home")}>
           <p>❮❮</p>
         </div>
       }
@@ -37,6 +43,7 @@ function ChatListItem({
         src={imgError ? fallbackImg : userImage}
         alt="DP"
         onError={() => setImgError(true)}
+        onClick={onIconClick}
       />
 
       <div className="chat-info">
