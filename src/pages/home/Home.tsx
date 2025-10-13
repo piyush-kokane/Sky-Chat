@@ -1,4 +1,6 @@
+import {  useState, useRef, useEffect  } from "react";
 import ChatItem from '@components/ChatListItem'
+import NewChatPanel from '@components/NewChat'
 import './Home.css'
 
 
@@ -29,6 +31,13 @@ const chatUsers = [
 
 
 function Home() {
+  const [showNewChatPanel, setNewChatPanel] = useState(false);
+  function toggleNewChatPanel(){
+    showNewChatPanel
+    ? setNewChatPanel(false)
+    : setNewChatPanel(true)
+  }
+
 
   return (
     <div className="home-pg">
@@ -63,6 +72,12 @@ function Home() {
         </div>
 
       </div>
+
+
+      <span className="new-chat material-symbols-rounded" onClick={toggleNewChatPanel}>add_comment</span>
+      
+      {showNewChatPanel && <NewChatPanel onCancelClick={toggleNewChatPanel}/>}
+
     </div>
   );
 }

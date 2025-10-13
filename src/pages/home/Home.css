@@ -48,7 +48,7 @@
     flex-direction: row;
     gap: 6px;
     font-size: 12px;
-    margin: 32px 0;
+    margin: 64px 0 32px;
     align-self: center;
     align-items: center;
 
@@ -79,4 +79,21 @@
   gap: 2px;
   padding: 10px 8px;
   overflow-y: auto;
+}
+
+.new-chat {
+    cursor: pointer;
+    position: absolute;
+    bottom: 48px;
+    right: 24px;
+    padding: 16px;
+    border-radius: 16px;
+    font-size: 32px;
+    background-color: #21c063;
+    color: black;
+    transition: transform 0.2s ease;
+
+    &:hover {
+        transform: scale(1.1);
+    }
 }
