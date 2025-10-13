@@ -29,20 +29,25 @@ function ProfilePanel({
         className="slide-in-right"
         onClick={(e) => e.stopPropagation()} // prevent click
       >
-        <div>
-          <span onClick={onCancelClick} className="material-symbols-rounded">close</span>
 
+        <span onClick={onCancelClick} className="material-symbols-rounded">close</span>
+
+
+        <div className="profile-container">
           <img
             src={imgError ? fallbackImg : userImage}
             alt="DP"
             onError={() => setImgError(true)}
           />
-
           <h1>{userName}</h1>
-
           <h2>{userContact}</h2>
-
         </div>
+
+
+        <div className="btn-container">
+          <button>Logout</button>
+        </div>
+
       </div>
     </div>
   );
