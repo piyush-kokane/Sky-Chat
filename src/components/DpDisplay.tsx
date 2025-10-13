@@ -17,8 +17,14 @@ function DpDisplay({
   const [imgError, setImgError] = useState(false);
 
   return (
-    <div className="dp-display-panel blur-bg-5 fade-in">
-      <div className="pop-up">
+    <div
+      className="dp-display-panel blur-bg-5 fade-in"
+      onClick={onCancelClick}
+    >
+      <div
+        className="pop-up"
+        onClick={(e) => e.stopPropagation()} // prevent click
+      >
         <img
         className={imgError ? "p-8" : ""}
           src={imgError ? fallbackImg : userImage}

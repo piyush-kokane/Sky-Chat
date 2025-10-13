@@ -18,8 +18,14 @@ function NewChat({
   }
 
   return (
-    <div className="new-chat-panel blur-bg fade-in">
-      <div className="pop-up">
+    <div
+      className="new-chat-panel blur-bg fade-in"
+      onClick={onCancelClick}
+    >
+      <div
+        className="pop-up"
+        onClick={(e) => e.stopPropagation()} // prevent click
+      >
         <h1>New Chat</h1>
         
         <input
