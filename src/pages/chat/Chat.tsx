@@ -1,8 +1,8 @@
 import {  useState, useRef, useEffect  } from "react";
-import fallbackImg from "@assets/default-user.png"; // fallback image
 import sendImg from "@assets/send-btn.svg";
 import ChatItem from '@components/ChatListItem'
 import MessageItem from '@components/Message'
+import DpDisplayPanel from '@components/DpDisplay'
 import './Chat.css'
 
 
@@ -41,9 +41,6 @@ const messages = [
 
 
 function Chat() { 
-  const [imgError, setImgError] = useState(false);
-
-
   const [showDp, setShowDp] = useState(false);
   function toggleDp(){
     showDp
@@ -86,18 +83,13 @@ function Chat() {
       </div>
 
 
-      {showDp &&
-        <div className="dp-display-panel blur-bg-5 fade-in">
-          <div className="pop-up">
-            <img
-              src={imgError ? fallbackImg : userData.userImage}
-              alt="DP"
-              onError={() => setImgError(true)}
-            />
-            <span onClick={toggleDp} className="material-symbols-rounded">close</span>
-          </div>
-        </div>
+      {showDp && 
+        <DpDisplayPanel 
+          onCancelClick={toggleDp}
+          userImage={userData.userImage}
+        />
       }
+
 
       <div className="chat-container">
         {messages.map((message, index) => (
