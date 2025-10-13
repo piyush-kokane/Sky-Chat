@@ -18,8 +18,8 @@ function NewChat({
   }
 
   return (
-    <div className="new-chat-panel blur-bg">
-      <div>
+    <div className="new-chat-panel blur-bg fade-in">
+      <div className="pop-up">
         <h1>New Chat</h1>
         
         <input

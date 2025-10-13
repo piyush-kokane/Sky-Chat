@@ -69,6 +69,46 @@ button:focus-visible {
   }
 }
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes popUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.2s ease-out;
+}
+
+.pop-up {
+  animation: popUp 0.2s ease-out;
+}
+
+.blur-bg {
+  background-color: rgb(20, 20, 20, 0.5);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+}
+
+.blur-bg-5{
+  background-color: rgb(20, 20, 20, 0.8);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
 /* WebKit browsers */
 ::-webkit-scrollbar {
   width: 8px;

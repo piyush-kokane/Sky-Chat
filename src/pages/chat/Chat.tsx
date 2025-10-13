@@ -87,8 +87,8 @@ function Chat() {
 
 
       {showDp &&
-        <div className="dp-display-container">
-          <div>
+        <div className="dp-display-panel blur-bg-5 fade-in">
+          <div className="pop-up">
             <img
               src={imgError ? fallbackImg : userData.userImage}
               alt="DP"
