@@ -1,7 +1,7 @@
 import {  useState, useRef, useEffect  } from "react";
 import ChatItem from '@components/ChatListItem'
-import NewChatPanel from '@components/NewChat'
-import ProfilePanel from '@components/ProfilePanel'
+import NewChatPanel from '@/panel/NewChat'
+import ProfilePanel from '@/panel/Profile'
 import './Home.css'
 
 

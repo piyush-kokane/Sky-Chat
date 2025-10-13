@@ -1,6 +1,6 @@
 import { useState } from "react";
 import fallbackImg from "@assets/default-user.png"; // fallback image
-import './/styles/ProfilePanel.css'
+import './styles/Profile.css'
 
 
 interface ProfilePanelProp {

@@ -2,7 +2,7 @@ import {  useState, useRef, useEffect  } from "react";
 import sendImg from "@assets/send-btn.svg";
 import ChatItem from '@components/ChatListItem'
 import MessageItem from '@components/Message'
-import DpDisplayPanel from '@components/DpDisplay'
+import DpDisplay from '@/panel/DpDisplay'
 import './Chat.css'
 
 
@@ -82,7 +82,7 @@ function Chat() {
 
 
       {showDp && 
-        <DpDisplayPanel 
+        <DpDisplay 
           onCancelClick={toggleDp}
           userImage={chatUserData.userImage}
         />
