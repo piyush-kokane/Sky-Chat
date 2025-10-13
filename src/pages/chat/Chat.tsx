@@ -7,11 +7,11 @@ import './Chat.css'
 
 
 
-const userData = {
+const chatUserData = {
   userImage: "https://chat-portfolio-dhanushnehru.netlify.app/images/dp.jpg", // user profile image
   userName: "Piyush Kokane",
-  userText: "Last seen on Monday",
-  userTime: "Today",
+  Text: "Last seen on Monday",
+  Time: "Today",
   messageCount: 1,
 };
 
@@ -43,9 +43,7 @@ const messages = [
 function Chat() { 
   const [showDp, setShowDp] = useState(false);
   function toggleDp(){
-    showDp
-    ? setShowDp(false)
-    : setShowDp(true)
+    setShowDp(!showDp)
   }
 
 
@@ -70,11 +68,11 @@ function Chat() {
       <div className="header">
         <ChatItem
           header={true}
-          userImage={userData.userImage}
-          userName={userData.userName}
-          userText={userData.userText}
-          userTime={userData.userTime}
-          messageCount={userData.messageCount}
+          userImage={chatUserData.userImage}
+          userName={chatUserData.userName}
+          Text={chatUserData.Text}
+          Time={chatUserData.Time}
+          messageCount={chatUserData.messageCount}
           onIconClick={toggleDp}
         />
 
@@ -86,7 +84,7 @@ function Chat() {
       {showDp && 
         <DpDisplayPanel 
           onCancelClick={toggleDp}
-          userImage={userData.userImage}
+          userImage={chatUserData.userImage}
         />
       }
 
