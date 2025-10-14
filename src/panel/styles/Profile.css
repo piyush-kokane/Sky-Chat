@@ -15,7 +15,7 @@
     justify-content: space-between;
     padding: 16px;
     padding-top: 64px;
-    background-color: rgb(50, 50, 50);
+    background-color: var(--panel-color);
     z-index: 11;
 }
 
@@ -28,9 +28,10 @@
     border-radius: 50%;
     background-color: #90909030;
     cursor: pointer;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.2s ease, color 0.2s ease;
 
     &:hover {
+        color: white;
         background-color: red;
     }
 }
@@ -60,13 +61,12 @@
     h1 {
         font-size: 24px;
         padding: 0 32px;
-        color: #ffffff;
     }
 
     h2 {
         font-size: 16px;
         padding: 0 64px;
-        color: #ffffff90;
+        color: var(--text-color-secondary);
     }
 
 }

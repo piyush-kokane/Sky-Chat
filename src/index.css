@@ -1,18 +1,40 @@
 @import "tailwindcss";
 
 :root {
-  font-family: 'Poppins', sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  /* common colors */
+  --icon-color: rgb(58, 149, 254);
+
+  /* light mode */
+  --bg-color: #F7F7F7;
+  --chat-bg-color: rgba(236, 229, 221, 0.314);
+  --panel-color: #FAFAFA;
+  --header-color: rgb(220, 230, 235);
+  --text-color-primary: #000000de;
+  --text-color-secondary: #00000099;
+  --text-color-inverted: #ffffffde;
+  --primary-color: #25d366;
+  --secondary-color: #1e9f4d;
+  --message-bar-color: #FAFAFA;
+  --chat-bubble-color: rgb(220, 255, 200);
+  --chat-received-bubble-color: #FAFAFA;
+}
+
+/* dark mode */
+[data-theme="dark"] {
+  --bg-color: #242424;
+  --chat-bg-color: rgba(18, 27, 33, 0.1);
+  --panel-color: #323232;
+  --header-color: rgb(32, 46, 54);
+  --text-color-primary: #ffffffde;
+  --text-color-secondary: #ffffff99;
+  --text-color-inverted: #000000de;
+  --primary-color: #21C063;
+  --secondary-color: #1e9f4d;
+  --message-bar-color: rgb(45, 45, 45);
+  --chat-bubble-color: #075e54;
+  --chat-received-bubble-color: #262d31;
 }
 
 a {
@@ -27,9 +49,21 @@ a:hover {
 body {
   margin: 0;
   display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  place-items: center;
+
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color: var(--text-color-primary);
+  background-color: var(--bg-color);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 h1 {
@@ -98,15 +132,29 @@ button:focus-visible {
 }
 
 .blur-bg {
-  background-color: rgb(20, 20, 20, 0.5);
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
 }
 
+body.dark .blur-bg {
+  background-color: rgba(20, 20, 20, 0.5);
+}
+
+body.light .blur-bg {
+  background-color: rgba(80, 80, 80, 0.5);
+}
+
 .blur-bg-5{
-  background-color: rgb(20, 20, 20, 0.8);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
+}
+
+body.dark .blur-bg-5 {
+  background-color: rgba(20, 20, 20, 0.8);
+}
+
+body.light .blur-bg-5 {
+  background-color: rgba(80, 80, 80, 0.8);
 }
 
 /* WebKit browsers */
@@ -117,12 +165,12 @@ button:focus-visible {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #444444aa;
+  background: rgba(127, 127, 127, 0.5);
   border-radius: 8px;
 }
 
 /* Firefox */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #444444aa transparent;
+  scrollbar-color: rgba(127, 127, 127, 0.214) transparent;
 }

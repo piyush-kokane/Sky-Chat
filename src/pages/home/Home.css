@@ -3,6 +3,7 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
+    background-color: var(--chat-bg-color);
     overflow: hidden; /* Prevent page scroll */
 }
 
@@ -13,7 +14,7 @@
     flex-direction: row;
     align-items: center;
     gap: 4px;
-    background-color: rgb(32, 46, 54);
+    background-color: var(--header-color);
 
     p {
         display: flex;
@@ -57,7 +58,7 @@
     }
 
     p:nth-of-type(2) {
-        color: #21c063;
+        color: var(--primary-color);
     }
 }
 
@@ -65,11 +66,11 @@
     position: absolute;
     height: 100%;
     width: 100%;
-    background-color: #90909050;
     background-image: url("@assets/chat-bg.png");
     background-position: center;
     background-size: 60%;
-    opacity: 0.03;
+    filter: invert(50%);
+    opacity: 0.08;
     z-index: -10;
 }
 
@@ -89,7 +90,7 @@
     padding: 16px;
     border-radius: 16px;
     font-size: 32px;
-    background-color: #21c063;
+    background-color: var(--primary-color);
     color: black;
     transition: transform 0.2s ease;
 

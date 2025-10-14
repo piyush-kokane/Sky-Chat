@@ -58,8 +58,6 @@
         opacity: 0;
         transition: opacity 0.1s ease;
     }
-
-
 }
 
 .chat-icon.style-header {
@@ -94,7 +92,7 @@
         font-size: 16px;
         font-weight: 500;
         flex: 1;
-        color: #ffffff;
+        color: var(--text-color-primary);
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -102,14 +100,14 @@
 
     h2 {
         font-size: 12px;
-        color: #ffffff99;
+        color: var(--text-color-secondary);
         white-space: nowrap;
     }
 
     h3 {
         font-size: 13px;
         flex: 1;
-        color: #ffffff99;
+        color: var(--text-color-secondary);
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -124,7 +122,7 @@
         font-size: 12px;
         font-weight: 600;
         padding: 2px 6px;
-        background-color: #21c063;
+        background-color: var(--primary-color);
         border-radius: 11px;
         color: #0A0A0A
     }

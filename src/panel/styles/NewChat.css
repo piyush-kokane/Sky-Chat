@@ -14,7 +14,7 @@
     display: flex;
     flex-direction: column;
     gap: 32px;
-    background-color: rgb(50, 50, 50);
+    background-color: var(--panel-color);
     border-radius: 10px;
     padding: 32px;
     margin: 32px;
@@ -29,7 +29,7 @@
 }
 
 .new-chat-panel input {
-    background-color: rgba(130, 130, 130, 0.25);
+    background-color: rgba(150, 150, 150, 0.15);
     border-radius: 10px;
     padding: 6px 10px;
     font-size: 18px;
@@ -53,22 +53,22 @@
     }
     
     Button:nth-child(1) {
-        color: #21c063;
+        color: var(--primary-color);
         background-color: transparent;
         border: 2px solid rgba(130, 130, 130, 0.1);
 
         &:hover{
-            color: white;
+            color: var(--text-color-primary);
         }
     }
 
     Button:nth-child(2) {
         color: black;
-        background-color: #21c063;
+        background-color: var(--primary-color);
 
         
         &:hover{
-            background-color: #1e934f;
+            background-color: var(--secondary-color);
         }
     }
 }

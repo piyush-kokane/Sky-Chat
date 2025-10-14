@@ -39,6 +39,14 @@ const chatUsers = [
 
 
 function Home() {
+  const [isDark, setIsDark] = useState(false);
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", isDark ? "dark" : "light");
+  }, [isDark]);
+  function toggleTheme(){
+    setIsDark(!isDark)
+  }
+
   const [showNewChatPanel, setNewChatPanel] = useState(false);
   function toggleNewChatPanel(){
     setNewChatPanel(!showNewChatPanel)
@@ -68,7 +76,7 @@ function Home() {
       <div className="header">
         <p> <h1>Sky</h1> <h2>Chat</h2> </p>
 
-        <span className="material-symbols-rounded">wb_sunny</span>
+        <span className="material-symbols-rounded" onClick={toggleTheme}>wb_sunny</span>
         <span className="material-symbols-outlined" onClick={toggleProfilePanel}>more_vert</span>
       </div>
 
