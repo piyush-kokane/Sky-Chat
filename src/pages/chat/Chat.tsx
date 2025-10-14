@@ -1,4 +1,5 @@
-import {  useState, useRef, useEffect  } from "react";
+import { useState, useRef, useEffect } from "react";
+import { useTheme } from "../../hooks/useTheme";
 import sendImg from "@assets/send-btn.svg";
 import ChatItem from '@components/ChatListItem'
 import MessageItem from '@components/Message'
@@ -41,6 +42,8 @@ const messages = [
 
 
 function Chat() { 
+  const { isDark, toggleTheme } = useTheme();
+
   const [showDp, setShowDp] = useState(false);
   function toggleDp(){
     setShowDp(!showDp)
@@ -76,7 +79,7 @@ function Chat() {
           onIconClick={toggleDp}
         />
 
-        <span className="material-symbols-rounded">wb_sunny</span>
+        <span className="material-symbols-rounded" onClick={toggleTheme}>{isDark ? "wb_sunny" : "moon_stars"}</span>
         <span className="material-symbols-outlined">more_vert</span>
       </div>
 

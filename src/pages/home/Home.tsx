@@ -1,4 +1,5 @@
 import {  useState, useRef, useEffect  } from "react";
+import { useTheme } from "../../hooks/useTheme";
 import ChatItem from '@components/ChatListItem'
 import NewChatPanel from '@/panel/NewChat'
 import ProfilePanel from '@/panel/Profile'
@@ -39,13 +40,8 @@ const chatUsers = [
 
 
 function Home() {
-  const [isDark, setIsDark] = useState(false);
-  useEffect(() => {
-    document.documentElement.setAttribute("data-theme", isDark ? "dark" : "light");
-  }, [isDark]);
-  function toggleTheme(){
-    setIsDark(!isDark)
-  }
+  const { isDark, toggleTheme } = useTheme();
+
 
   const [showNewChatPanel, setNewChatPanel] = useState(false);
   function toggleNewChatPanel(){
@@ -76,7 +72,7 @@ function Home() {
       <div className="header">
         <p> <h1>Sky</h1> <h2>Chat</h2> </p>
 
-        <span className="material-symbols-rounded" onClick={toggleTheme}>wb_sunny</span>
+        <span className="material-symbols-rounded" onClick={toggleTheme}>{isDark ? "wb_sunny" : "moon_stars"}</span>
         <span className="material-symbols-outlined" onClick={toggleProfilePanel}>more_vert</span>
       </div>
 

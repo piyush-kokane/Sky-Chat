@@ -29,7 +29,7 @@
     }
 
     h1 {
-        color: rgb(58, 149, 254);
+        color: var(--icon-color);
     }
 
     span {
