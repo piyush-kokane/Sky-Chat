@@ -24,10 +24,11 @@
     font-size: 52px;
     font-weight: bolder;
     font-family: 'M PLUS Rounded 1c', sans-serif;
+    color: white;
   }
 
   h1 {
-    color: rgb(58, 149, 254);
+    color: var(--icon-color);
   }
 }
 
@@ -44,6 +45,7 @@
   button {
     height: 50px;
     transition: all 0.2s ease;
+    color: white;
 
     &:hover {
       transform: scale(1.1);

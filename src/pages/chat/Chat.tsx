@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { useTheme } from "../../hooks/useTheme";
+import { useTheme } from "@hooks/useTheme";
 import sendImg from "@assets/send-btn.svg";
 import ChatItem from '@components/ChatListItem'
 import MessageItem from '@components/Message'

@@ -1,5 +1,5 @@
 import {  useState, useRef, useEffect  } from "react";
-import { useTheme } from "../../hooks/useTheme";
+import { useTheme } from "@hooks/useTheme";
 import ChatItem from '@components/ChatListItem'
 import NewChatPanel from '@/panel/NewChat'
 import ProfilePanel from '@/panel/Profile'

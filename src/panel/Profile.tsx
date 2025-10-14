@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTheme } from "@hooks/useTheme";
 import fallbackImg from "@assets/default-user.png"; // fallback image
 import ToggleSwitch from "@components/ToggleSwitch"; // fallback image
 import './styles/Profile.css'
@@ -19,14 +20,12 @@ function ProfilePanel({
   onCancelClick,
 }: ProfilePanelProp) {
 
+  const { isDark, toggleTheme } = useTheme();
+
   const [imgError, setImgError] = useState(false);
 
   const [notifications, setnotifications] = useState(false);
 
-  const [isDarkMode, setDarkMode] = useState(false);
-  const handleToggle = (checked: boolean) => {
-    console.log("Switch is:", checked ? "ON" : "OFF");
-  };
 
   return (
     <div
@@ -58,18 +57,17 @@ function ProfilePanel({
           <div className="seperator"/>
           
           <div>
-            <h2>Dark Mode</h2>
-            <ToggleSwitch onToggle={handleToggle} />
+            <h2><span className="material-symbols-rounded">{isDark ? "wb_sunny" : "moon_stars"}</span>Dark Mode</h2>
+            <ToggleSwitch onToggle={toggleTheme} />
           </div>
 
           <div className="seperator"/>
 
           <div>
-            <h2>Notifications</h2>
-            <ToggleSwitch onToggle={handleToggle} />
+            <h2><span className="material-symbols-rounded">notifications</span>Notifications</h2>
+            <ToggleSwitch onToggle={() => setnotifications(!notifications)} />
           </div>
 
-          <div className="seperator s-16"/>
 
           <button className="logout"><span className="material-symbols-rounded">logout</span>Logout</button>
         </div>
