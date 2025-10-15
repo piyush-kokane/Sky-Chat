@@ -3,6 +3,7 @@ import { useTheme } from "@hooks/useTheme";
 import ChatItem from '@components/ChatListItem'
 import NewChatPanel from '@/panel/NewChat'
 import ProfilePanel from '@/panel/Profile'
+import DpDisplay from '@/panel/DpDisplay'
 import './Home.css'
 
 
@@ -42,23 +43,23 @@ const chatList_Onkar = [
 function Home() {
   const { isDark, toggleTheme } = useTheme();
 
+  const [showDp, setShowDp] = useState(false);
+  const toggleDp = () => setShowDp(!showDp)
 
   const [showNewChatPanel, setNewChatPanel] = useState(false);
-  const toggleNewChatPanel = () => {
-    setNewChatPanel(!showNewChatPanel)
-  }
-
+  const toggleNewChatPanel = () => setNewChatPanel(!showNewChatPanel)
 
   const [showProfilePanel, setProfilePanel] = useState(false);
-  const toggleProfilePanel = () => {
-    setProfilePanel(!showProfilePanel)
-  }
+  const toggleProfilePanel = () => setProfilePanel(!showProfilePanel)
 
 
   return (
     <div className="home-pg">
+      {/* Background */}
       <div className="home-bg" />
 
+
+      {/* Profile Panel */}
       {showProfilePanel &&
         <ProfilePanel
           userImage={userData.userImage}
@@ -69,6 +70,28 @@ function Home() {
       }
 
 
+      {/* DP Panel */}
+      {showDp && 
+        <DpDisplay 
+          onCancelClick={toggleDp}
+          userImage={userData.userImage}
+        />
+      }
+
+
+      {/* New-Chat Panel */}
+      {showNewChatPanel && 
+        <NewChatPanel
+          onCancelClick={toggleNewChatPanel}
+        />
+      }
+
+
+      {/* New-Chat Btn */}
+      <span className="new-chat material-symbols-rounded" onClick={toggleNewChatPanel}>add_comment</span>
+      
+
+      {/* Header */}
       <div className="header">
         <p> <h1>Sky</h1> <h2>Chat</h2> </p>
 
@@ -77,6 +100,7 @@ function Home() {
       </div>
 
 
+      {/* Chats List */}
       <div className="chat-list">
         {chatList.map((user, index) => (
           <ChatItem
@@ -95,13 +119,7 @@ function Home() {
           <p>Your personal messages are</p>
           <p>end-to-end encrypted</p>
         </div>
-
       </div>
-
-
-      <span className="new-chat material-symbols-rounded" onClick={toggleNewChatPanel}>add_comment</span>
-      
-      {showNewChatPanel && <NewChatPanel onCancelClick={toggleNewChatPanel}/>}
 
     </div>
   );

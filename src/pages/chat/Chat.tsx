@@ -52,14 +52,10 @@ function Chat() {
   const { isDark, toggleTheme } = useTheme();
 
   const [showDp, setShowDp] = useState(false);
-  const toggleDp = () => {
-    setShowDp(!showDp)
-  }
-
+  const toggleDp = () => setShowDp(!showDp)
+  
   const [showProfilePanel, setProfilePanel] = useState(false);
-  const toggleProfilePanel = () => {
-    setProfilePanel(!showProfilePanel)
-  }
+  const toggleProfilePanel = () => setProfilePanel(!showProfilePanel)
 
   const [message, setMessage] = useState("");
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -76,9 +72,11 @@ function Chat() {
 
   return (
     <div className="chats-pg">
+      {/* Background */}
       <div className="chat-bg" />
 
 
+      {/* Profile Panel */}
       {showProfilePanel &&
         <ProfilePanel
           userImage={userData.userImage}
@@ -89,6 +87,16 @@ function Chat() {
       }
 
 
+      {/* DP Panel */}
+      {showDp && 
+        <DpDisplay 
+          onCancelClick={toggleDp}
+          userImage={chatUserData.userImage}
+        />
+      }
+
+
+      {/* Header */}
       <div className="header">
         <ChatItem
           header={true}
@@ -105,14 +113,7 @@ function Chat() {
       </div>
 
 
-      {showDp && 
-        <DpDisplay 
-          onCancelClick={toggleDp}
-          userImage={chatUserData.userImage}
-        />
-      }
-
-
+      {/* Chats */}
       <div className="chat-container">
         {messages.map((message, index) => (
           <MessageItem
@@ -125,6 +126,7 @@ function Chat() {
       </div>
 
 
+      {/* Message Bar */}
       <div className="message-bar-container">
         <textarea
           ref={textareaRef}
@@ -137,7 +139,6 @@ function Chat() {
         <img className="send-message" src={sendImg} />
       </div>
 
-      
     </div>
   );
 }

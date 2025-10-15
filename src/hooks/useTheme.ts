@@ -5,7 +5,7 @@ export function useTheme() {
   const [isDark, setIsDark] = useState(savedTheme === "dark");
 
   const toggleTheme = () => {
-    setIsDark((prev) => !prev);
+    setIsDark(!isDark);
   };
 
   useEffect(() => {
