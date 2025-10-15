@@ -4,9 +4,16 @@ import sendImg from "@assets/send-btn.svg";
 import ChatItem from '@components/ChatListItem'
 import MessageItem from '@components/Message'
 import DpDisplay from '@/panel/DpDisplay'
+import ProfilePanel from '@/panel/Profile'
 import './Chat.css'
 
 
+
+const userData = {
+  userImage: "https://chat-portfolio-dhanushnehru.netlify.app/images/dp.jpg", // user profile image
+  userName: "Piyush Kokane",
+  userContact: "8806808503",
+};
 
 const chatUserData = {
   userImage: "https://chat-portfolio-dhanushnehru.netlify.app/images/dp.jpg", // user profile image
@@ -45,10 +52,14 @@ function Chat() {
   const { isDark, toggleTheme } = useTheme();
 
   const [showDp, setShowDp] = useState(false);
-  function toggleDp(){
+  const toggleDp = () => {
     setShowDp(!showDp)
   }
 
+  const [showProfilePanel, setProfilePanel] = useState(false);
+  const toggleProfilePanel = () => {
+    setProfilePanel(!showProfilePanel)
+  }
 
   const [message, setMessage] = useState("");
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -68,6 +79,16 @@ function Chat() {
       <div className="chat-bg" />
 
 
+      {showProfilePanel &&
+        <ProfilePanel
+          userImage={userData.userImage}
+          userName={userData.userName}
+          userContact={userData.userContact}
+          onCancelClick={toggleProfilePanel}
+        />
+      }
+
+
       <div className="header">
         <ChatItem
           header={true}
@@ -80,7 +101,7 @@ function Chat() {
         />
 
         <span className="material-symbols-rounded" onClick={toggleTheme}>{isDark ? "wb_sunny" : "moon_stars"}</span>
-        <span className="material-symbols-outlined">more_vert</span>
+        <span className="material-symbols-outlined" onClick={toggleProfilePanel}>more_vert</span>
       </div>
 
 

@@ -57,7 +57,7 @@ function ProfilePanel({
           <div className="seperator"/>
           
           <div>
-            <h2><span className="material-symbols-rounded">{isDark ? "wb_sunny" : "moon_stars"}</span>Dark Mode</h2>
+            <h2><span className="material-symbols-rounded">{isDark ? "moon_stars" : "wb_sunny"}</span>Dark Mode</h2>
             <ToggleSwitch onToggle={toggleTheme} />
           </div>
 
