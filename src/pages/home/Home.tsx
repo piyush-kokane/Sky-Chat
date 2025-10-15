@@ -43,8 +43,8 @@ const chatList_Onkar = [
 function Home() {
   const { isDark, toggleTheme } = useTheme();
 
-  const [showDp, setShowDp] = useState(false);
-  const toggleDp = () => setShowDp(!showDp)
+  const [showDpPanel, setDpPanel] = useState(false);
+  const toggleDpPanel = () => setDpPanel(!showDpPanel)
 
   const [showNewChatPanel, setNewChatPanel] = useState(false);
   const toggleNewChatPanel = () => setNewChatPanel(!showNewChatPanel)
@@ -65,15 +65,16 @@ function Home() {
           userImage={userData.userImage}
           userName={userData.userName}
           userContact={userData.userContact}
+          onIconClick={toggleDpPanel}
           onCancelClick={toggleProfilePanel}
         />
       }
 
 
       {/* DP Panel */}
-      {showDp && 
+      {showDpPanel && 
         <DpDisplay 
-          onCancelClick={toggleDp}
+          onCancelClick={toggleDpPanel}
           userImage={userData.userImage}
         />
       }

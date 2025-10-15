@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useTheme } from "@hooks/useTheme";
 import fallbackImg from "@assets/default-user.png"; // fallback image
-import ToggleSwitch from "@components/ToggleSwitch"; // fallback image
+import ToggleSwitch from "@components/ToggleSwitch";
 import './styles/Profile.css'
 
 
@@ -9,6 +9,7 @@ interface ProfilePanelProp {
   userImage: string;
   userName: string;
   userContact: string;
+  onIconClick?: () => void;
   onCancelClick: () => void;
 }
 
@@ -17,6 +18,7 @@ function ProfilePanel({
   userImage,
   userName,
   userContact,
+  onIconClick,
   onCancelClick,
 }: ProfilePanelProp) {
 
@@ -44,6 +46,7 @@ function ProfilePanel({
           <img
             src={imgError ? fallbackImg : userImage}
             alt="DP"
+            onClick={onIconClick}
             onError={() => setImgError(true)}
           />
           <h1>{userName}</h1>

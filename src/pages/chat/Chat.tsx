@@ -51,8 +51,8 @@ const messages = [
 function Chat() { 
   const { isDark, toggleTheme } = useTheme();
 
-  const [showDp, setShowDp] = useState(false);
-  const toggleDp = () => setShowDp(!showDp)
+  const [showDpPanel, setDpPanel] = useState(false);
+  const toggleDpPanel = () => setDpPanel(!showDpPanel)
   
   const [showProfilePanel, setProfilePanel] = useState(false);
   const toggleProfilePanel = () => setProfilePanel(!showProfilePanel)
@@ -82,15 +82,16 @@ function Chat() {
           userImage={userData.userImage}
           userName={userData.userName}
           userContact={userData.userContact}
+          onIconClick={toggleDpPanel}
           onCancelClick={toggleProfilePanel}
         />
       }
 
 
       {/* DP Panel */}
-      {showDp && 
+      {showDpPanel && 
         <DpDisplay 
-          onCancelClick={toggleDp}
+          onCancelClick={toggleDpPanel}
           userImage={chatUserData.userImage}
         />
       }
@@ -105,7 +106,7 @@ function Chat() {
           Text={chatUserData.Text}
           Time={chatUserData.Time}
           messageCount={chatUserData.messageCount}
-          onIconClick={toggleDp}
+          onIconClick={toggleDpPanel}
         />
 
         <span className="material-symbols-rounded" onClick={toggleTheme}>{isDark ? "wb_sunny" : "moon_stars"}</span>
