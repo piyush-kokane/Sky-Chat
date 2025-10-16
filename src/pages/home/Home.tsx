@@ -1,4 +1,5 @@
 import {  useState, useRef, useEffect  } from "react";
+import { useAuth } from "react-oidc-context";
 import { useTheme } from "@hooks/useTheme";
 import ChatItem from '@components/ChatListItem'
 import NewChatPanel from '@/panel/NewChat'
@@ -10,7 +11,7 @@ import './Home.css'
 
  /* ---------------------------------------------------------------------------------------------------- */
 /* Logedin User */
-const logedinAs = "Advait";  // "Piyush", "Advait", "Onkar"
+const logedinAs = "Onkar";  // "Piyush", "Advait", "Onkar"
 
 
 
@@ -106,6 +107,8 @@ const chatList = [
 
 
 function Home() {
+  const auth = useAuth();
+
   const { isDark, toggleTheme } = useTheme();
 
   const [showDpPanel, setDpPanel] = useState(false);
@@ -118,6 +121,9 @@ function Home() {
   const toggleProfilePanel = () => setProfilePanel(!showProfilePanel)
 
 
+  if (auth.isLoading) return <div>Loading...</div>;
+  if (!auth.isAuthenticated) return <div>Redirecting...</div>;
+
   return (
     <div className="home-pg">
       {/* Background */}
@@ -129,7 +135,7 @@ function Home() {
         <ProfilePanel
           userImage={userData?.userImage}
           userName={userData?.userName}
-          userContact={userData?.userContact}
+          userContact={auth.user?.profile.email}
           onIconClick={toggleDpPanel}
           onCancelClick={toggleProfilePanel}
         />

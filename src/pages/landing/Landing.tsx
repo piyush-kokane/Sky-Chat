@@ -1,21 +1,21 @@
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "react-oidc-context";
 import icon from "@assets/SkyChat-logo.png"
 import './Landing.css'
 
 
 
 function Landing() {
+  const auth = useAuth();
   const navigate = useNavigate();
 
   const handleSignin = () => {
     localStorage.setItem("login", "true");
-    navigate("/home")
-
-    /* window.location.href = "https://signin.com"; */
+    auth.signinRedirect()
   };
 
   const handleSignup = () => {
-    window.location.href = "https://signup.com";
+    auth.signinRedirect({ prompt: "signup" })
   };
 
   return (

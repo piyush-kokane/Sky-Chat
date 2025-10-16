@@ -1,14 +1,15 @@
 import { useState } from "react";
 import { useTheme } from "@hooks/useTheme";
+import { useAuth } from "react-oidc-context";
 import fallbackImg from "@assets/default-user.png"; // fallback image
 import ToggleSwitch from "@components/ToggleSwitch";
 import './styles/Profile.css'
 
 
 interface ProfilePanelProp {
-  userImage: string;
-  userName: string;
-  userContact: string;
+  userImage?: string;
+  userName?: string;
+  userContact?: string;
   onIconClick?: () => void;
   onCancelClick: () => void;
 }
@@ -22,12 +23,21 @@ function ProfilePanel({
   onCancelClick,
 }: ProfilePanelProp) {
 
+  const auth = useAuth();
+
   const { isDark, toggleTheme } = useTheme();
 
   const [imgError, setImgError] = useState(false);
 
   const [notifications, setnotifications] = useState(false);
 
+
+  const handleLogout = () => {
+    const logoutUri = "http://localhost:5173/";
+    const cognitoDomain = "https://us-east-1xillukbyv.auth.us-east-1.amazoncognito.com";
+    auth.removeUser(); // remove tokens from localStorage
+    window.location.href = `${cognitoDomain}/logout?client_id=1sel5r7k42ls80ubk82fsv5uel&logout_uri=${encodeURIComponent(logoutUri)}`;
+  };
 
   return (
     <div
@@ -81,7 +91,9 @@ function ProfilePanel({
           </div>
 
           {/* Logout */}
-          <button className="logout"><span className="material-symbols-rounded">logout</span>Logout</button>
+          <button className="logout" onClick={handleLogout}>
+            <span className="material-symbols-rounded">logout</span>Logout
+          </button>
         </div>
 
       </div>
