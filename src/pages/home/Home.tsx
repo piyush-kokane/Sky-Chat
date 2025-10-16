@@ -38,19 +38,19 @@ interface UsersChatList {
 
 const users: Record<string, UserData> = {
   Piyush: {
-    userImage: "https://chat-portfolio-dhanushnehru.netlify.app/images/dp.jpg",
+    userImage: "https://randomuser.me/api/portraits/men/1.jpg",
     userName: "Piyush Kokane",
     userContact: "8806808503",
   },
 
   Advait: {
-    userImage: "https://chat-portfolio-dhanushnehru.netlify.app/images/dp.jpg",
+    userImage: "https://randomuser.me/api/portraits/men/2.jpg",
     userName: "Advait More",
     userContact: "8806808503",
   },
 
   Onkar: {
-    userImage: "https://chat-portfolio-dhanushnehru.netlify.app/images/dp.jpg",
+    userImage: "https://randomuser.me/api/portraits/men/3.jpg",
     userName: "Onkar Kale",
     userContact: "8806808503",
   },
@@ -89,7 +89,7 @@ const _chatList: UsersChatList[] = usersChatList[logedinAs];
 // Add 'You' to chat list
 const chatList = [
   {
-    userImage: "https://randomuser.me/api/portraits/men/40.jpg",
+    userImage: userData.userImage,
     userName: userData.userName + " (You)",
     Text: "This is me !!!",
     Time: "Now",
