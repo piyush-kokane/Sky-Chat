@@ -39,9 +39,11 @@ function ProfilePanel({
         onClick={(e) => e.stopPropagation()} // prevent click
       >
 
+        {/* Close */}
         <span onClick={onCancelClick} className="material-symbols-rounded cancel">close</span>
 
 
+        {/* Profile */}
         <div className="profile-container">
           <img
             src={imgError ? fallbackImg : userImage}
@@ -54,24 +56,31 @@ function ProfilePanel({
         </div>
 
 
+        {/* Buttons & Toggles */}
         <div className="btn-container">
+          {/* Edit Profile */}
           <button><span className="material-symbols-rounded">edit</span>Edit profile</button>
 
           <div className="seperator"/>
           
+          {/* Theme */}
           <div>
-            <h2><span className="material-symbols-rounded">{isDark ? "moon_stars" : "wb_sunny"}</span>Dark Mode</h2>
-            <ToggleSwitch onToggle={toggleTheme} />
+            <h2><span className="material-symbols-rounded">{isDark ? "wb_sunny" : "moon_stars"}</span>Dark Mode</h2>
+            <ToggleSwitch
+              defaultState={isDark}
+              onToggle={toggleTheme}
+            />
           </div>
 
           <div className="seperator"/>
 
+          {/* Notifications */}
           <div>
             <h2><span className="material-symbols-rounded">notifications</span>Notifications</h2>
             <ToggleSwitch onToggle={() => setnotifications(!notifications)} />
           </div>
 
-
+          {/* Logout */}
           <button className="logout"><span className="material-symbols-rounded">logout</span>Logout</button>
         </div>
 

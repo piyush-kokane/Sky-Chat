@@ -1,17 +1,20 @@
 import { useState } from "react";
 import "./styles/ToggleSwitch.css";
 
+
+
 interface ToggleSwitchProps {
+  defaultState?: boolean;
   onToggle?: (checked: boolean) => void;
 }
 
-const ToggleSwitch: React.FC<ToggleSwitchProps> = ({ onToggle }) => {
-  const [isChecked, setIsChecked] = useState(false);
+
+function ToggleSwitch({ defaultState = false, onToggle } : ToggleSwitchProps ) {
+  const [isChecked, setChecked] = useState(defaultState);
 
   const handleToggle = () => {
-    const newState = !isChecked;
-    setIsChecked(newState);
-    if (onToggle) onToggle(newState);
+    setChecked(!isChecked);
+    onToggle?.(!isChecked);
   };
 
   return (
