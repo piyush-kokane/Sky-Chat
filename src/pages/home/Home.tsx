@@ -8,35 +8,100 @@ import './Home.css'
 
 
 
-const userData = {
-  userImage: "https://chat-portfolio-dhanushnehru.netlify.app/images/dp.jpg", // user profile image
-  userName: "Piyush Kokane",
-  userContact: "8806808503",
+ /* ---------------------------------------------------------------------------------------------------- */
+/* Logedin User */
+const logedinAs = "Advait";  // "Piyush", "Advait", "Onkar"
+
+
+
+ /* ---------------------------------------------------------------------------------------------------- */
+/* Interface */
+
+interface UserData {
+  userImage: string;
+  userName: string;
+  userContact: string;
+}
+
+interface UsersChatList {
+  userImage: string;
+  userName: string;
+  Text: string;
+  Time: string;
+  messageCount: number;
+}
+
+
+
+ /* ---------------------------------------------------------------------------------------------------- */
+/* Database */
+
+const users: Record<string, UserData> = {
+  Piyush: {
+    userImage: "https://chat-portfolio-dhanushnehru.netlify.app/images/dp.jpg",
+    userName: "Piyush Kokane",
+    userContact: "8806808503",
+  },
+
+  Advait: {
+    userImage: "https://chat-portfolio-dhanushnehru.netlify.app/images/dp.jpg",
+    userName: "Advait More",
+    userContact: "8806808503",
+  },
+
+  Onkar: {
+    userImage: "https://chat-portfolio-dhanushnehru.netlify.app/images/dp.jpg",
+    userName: "Onkar Kale",
+    userContact: "8806808503",
+  },
+};
+
+const usersChatList: Record<string, UsersChatList[]> = {
+  Piyush: [
+    { userImage: "https://randomuser.me/api/portraits/men/10.jpg", userName: "Dhanush Nehru", Text: "Typing...", Time: "12:15 PM", messageCount: 3 },
+    { userImage: "https://randomuser.me/api/portraits/women/20.jpg", userName: "Sarah Lee", Text: "Sent a photo", Time: "Yesterday", messageCount: 2 },
+    { userImage: "https://randomuser.me/api/portraits/men/30.jpg", userName: "John Doe", Text: "Online", Time: "10:30 AM", messageCount: 0 },
+  ],
+
+  Advait: [
+    { userImage: "https://randomuser.me/api/portraits/men/40.jpg", userName: "Michael Scott", Text: "Last seen today", Time: "11:45 AM", messageCount: 1 },
+    { userImage: "https://randomuser.me/api/portraits/women/50.jpg", userName: "Pam Beesly", Text: "Sent a file", Time: "Yesterday", messageCount: 4 },
+    { userImage: "https://randomuser.me/api/portraits/men/60.jpg", userName: "Jim Halpert", Text: "Online", Time: "09:20 AM", messageCount: 0 },
+  ],
+
+  Onkar: [
+    { userImage: "https://randomuser.me/api/portraits/men/70.jpg", userName: "Dwight Schrute", Text: "Typing...", Time: "12:00 PM", messageCount: 2 },
+    { userImage: "https://randomuser.me/api/portraits/women/80.jpg", userName: "Angela Martin", Text: "Sent a message", Time: "Yesterday", messageCount: 1 },
+    { userImage: "https://randomuser.me/api/portraits/men/90.jpg", userName: "Kevin Malone", Text: "Online", Time: "08:45 AM", messageCount: 0 },
+  ],
 };
 
 
-const chatList_Piyush = [
-  { userImage: "https://chat-portfolio-dhanushnehru.netlify.app/images/dp.jpg", userName: "Piyush Kokane", Text: "Last seen on Monday", Time: "Today", messageCount: 1 },
-  { userImage: "https://chat-portfolio-dhanushnehru.netlify.app/images/dp.jpg", userName: "Dhanush Nehru", Text: "Typing...", Time: "12:15 pm", messageCount: 3 },
-  { userImage: "https://chat-portfolio-dhanushnehru.netlify.app/images/dp.jpg", userName: "Sarah Lee", Text: "Sent a photo", Time: "Yesterday", messageCount: 2 },
-  { userImage: "https://chat-portfolio-dhanushnehru.netlify.app/images/dp.jpg", userName: "John Doe", Text: "Online", Time: "10:30 am", messageCount: 0 },
- ]
 
-const chatList_Advait = [
-  { userImage: "https://chat-portfolio-dhanushnehru.netlify.app/images/dp.jpg", userName: "Piyush Kokane", Text: "Last seen on Monday", Time: "Today", messageCount: 1 },
-  { userImage: "https://chat-portfolio-dhanushnehru.netlify.app/images/dp.jpg", userName: "Dhanush Nehru", Text: "Typing...", Time: "12:15 pm", messageCount: 3 },
-  { userImage: "https://chat-portfolio-dhanushnehru.netlify.app/images/dp.jpg", userName: "Sarah Lee", Text: "Sent a photo", Time: "Yesterday", messageCount: 2 },
-  { userImage: "https://chat-portfolio-dhanushnehru.netlify.app/images/dp.jpg", userName: "John Doe", Text: "Online", Time: "10:30 am", messageCount: 0 },
-]
+ /* ---------------------------------------------------------------------------------------------------- */
+/* Data */
 
-const chatList_Onkar = [
-  { userImage: "https://chat-portfolio-dhanushnehru.netlify.app/images/dp.jpg", userName: "Piyush Kokane", Text: "Last seen on Monday", Time: "Today", messageCount: 1 },
-  { userImage: "https://chat-portfolio-dhanushnehru.netlify.app/images/dp.jpg", userName: "Dhanush Nehru", Text: "Typing...", Time: "12:15 pm", messageCount: 3 },
-  { userImage: "https://chat-portfolio-dhanushnehru.netlify.app/images/dp.jpg", userName: "Sarah Lee", Text: "Sent a photo", Time: "Yesterday", messageCount: 2 },
-  { userImage: "https://chat-portfolio-dhanushnehru.netlify.app/images/dp.jpg", userName: "John Doe", Text: "Online", Time: "10:30 am", messageCount: 0 },
-]
+const userData: UserData = users[logedinAs];
 
- const chatList = chatList_Piyush;
+const _chatList: UsersChatList[] = usersChatList[logedinAs];
+
+
+// Add 'You' to chat list
+const chatList = [
+  {
+    userImage: "https://randomuser.me/api/portraits/men/40.jpg",
+    userName: userData.userName + " (You)",
+    Text: "This is me !!!",
+    Time: "Now",
+    messageCount: 0,
+  },
+  ..._chatList,
+];
+
+
+
+
+
 
 
 
@@ -62,9 +127,9 @@ function Home() {
       {/* Profile Panel */}
       {showProfilePanel &&
         <ProfilePanel
-          userImage={userData.userImage}
-          userName={userData.userName}
-          userContact={userData.userContact}
+          userImage={userData?.userImage}
+          userName={userData?.userName}
+          userContact={userData?.userContact}
           onIconClick={toggleDpPanel}
           onCancelClick={toggleProfilePanel}
         />
@@ -75,7 +140,7 @@ function Home() {
       {showDpPanel && 
         <DpDisplay 
           onCancelClick={toggleDpPanel}
-          userImage={userData.userImage}
+          userImage={userData?.userImage}
         />
       }
 

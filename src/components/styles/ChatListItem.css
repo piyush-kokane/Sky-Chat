@@ -24,10 +24,10 @@
 .chat-item .back {
     display: inline-block;
     font-size: 18px;
+    cursor: pointer;
     transition: font-size 0.2s ease;
 
     &:hover {
-      cursor: pointer;
       font-size: 24px;
     }
 }
