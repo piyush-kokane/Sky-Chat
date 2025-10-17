@@ -121,9 +121,6 @@ function Home() {
   const toggleProfilePanel = () => setProfilePanel(!showProfilePanel)
 
 
-  if (auth.isLoading) return <div>Loading...</div>;
-  if (!auth.isAuthenticated) return <div>Redirecting...</div>;
-
   return (
     <div className="home-pg">
       {/* Background */}

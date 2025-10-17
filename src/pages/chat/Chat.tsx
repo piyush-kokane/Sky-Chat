@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { useAuth } from "react-oidc-context";
 import { useTheme } from "@hooks/useTheme";
 import sendImg from "@assets/send-btn.svg";
 import ChatItem from '@components/ChatListItem'
@@ -49,6 +50,8 @@ const messages = [
 
 
 function Chat() { 
+  const auth = useAuth();
+  
   const { isDark, toggleTheme } = useTheme();
 
   const [showDpPanel, setDpPanel] = useState(false);

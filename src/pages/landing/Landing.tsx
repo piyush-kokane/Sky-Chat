@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import { useAuth } from "react-oidc-context";
 import icon from "@assets/SkyChat-logo.png"
 import './Landing.css'
@@ -7,10 +6,8 @@ import './Landing.css'
 
 function Landing() {
   const auth = useAuth();
-  const navigate = useNavigate();
 
   const handleSignin = () => {
-    localStorage.setItem("login", "true");
     auth.signinRedirect()
   };
 
