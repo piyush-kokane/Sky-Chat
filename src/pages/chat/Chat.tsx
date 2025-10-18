@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { useAuth } from "react-oidc-context";
 import { useTheme } from "@hooks/useTheme";
 import sendImg from "@assets/send-btn.svg";
@@ -11,15 +12,6 @@ import './Chat.css'
 
 
 
-
-const chatUserData = {
-  userImage: "https://chat-portfolio-dhanushnehru.netlify.app/images/dp.jpg", // user profile image
-  userName: "piyush_kokane",
-  displayName: "Piyush Kokane",
-  Text: "Last seen on Monday",
-  Time: "Today",
-  messageCount: 1,
-};
 
 const messages = [
   { received: true, text: "Hello!", time: "7:00 pm" },
@@ -47,6 +39,17 @@ const messages = [
 
 
 function Chat() { 
+  const location = useLocation();
+  
+  const chatUserData = location.state as {
+    userImage: string;
+    userName: string;
+    displayName: string;
+    Text: string;
+    Time: string;
+    messageCount: number;
+  };
+
   const { isDark, toggleTheme } = useTheme();
 
   const [showDpPanel, setDpPanel] = useState(false);

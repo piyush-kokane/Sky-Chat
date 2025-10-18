@@ -32,8 +32,18 @@ function ChatListItem({
   const [imgError, setImgError] = useState(false);
   
   const handleClick = () => {
-    if (!header)
-      navigate(`/chat/${userName}`)
+    if (!header) {
+      navigate(`/chat/${userName}`, {
+        state: {
+          userImage,
+          userName,
+          displayName,
+          Text,
+          Time,
+          messageCount,
+        },
+      });
+    }
   };
 
   return (
