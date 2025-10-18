@@ -8,6 +8,7 @@ interface ChatListItemProps {
   header: boolean; // style type
   userImage: string;
   userName: string;
+  displayName: string;
   Text: string;
   Time: string;
   messageCount: number;
@@ -19,6 +20,7 @@ function ChatListItem({
   header,
   userImage,
   userName,
+  displayName,
   Text,
   Time,
   messageCount,
@@ -63,7 +65,7 @@ function ChatListItem({
 
       <div className="chat-info">
         <div>
-          <h1>{userName}</h1>
+          <h1>{displayName}</h1>
           {!header && <h2>{Time}</h2> }
         </div>
         <div>

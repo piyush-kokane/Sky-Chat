@@ -14,7 +14,8 @@ import './Chat.css'
 
 const chatUserData = {
   userImage: "https://chat-portfolio-dhanushnehru.netlify.app/images/dp.jpg", // user profile image
-  userName: "Piyush Kokane",
+  userName: "piyush_kokane",
+  displayName: "Piyush Kokane",
   Text: "Last seen on Monday",
   Time: "Today",
   messageCount: 1,
@@ -96,6 +97,7 @@ function Chat() {
           header={true}
           userImage={chatUserData.userImage}
           userName={chatUserData.userName}
+          displayName={chatUserData.displayName}
           Text={chatUserData.Text}
           Time={chatUserData.Time}
           messageCount={chatUserData.messageCount}
