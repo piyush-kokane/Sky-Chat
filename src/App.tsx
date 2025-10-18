@@ -14,7 +14,7 @@ function ProtectedRoute({ element }: { element: ReactElement }) {
 
   if (isLoading) return <p>Loading...</p>;
 
-  if (!isAuthenticated) {
+  if (isAuthenticated) {
     toast.success("Please Login first");
     return <Navigate to="/" replace />;
   }

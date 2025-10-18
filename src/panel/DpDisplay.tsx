@@ -4,7 +4,7 @@ import './styles/DpDisplay.css'
 
 
 interface DpDisplayProp {
-  userImage: string;
+  userImage?: string;
   onCancelClick: () => void;
 }
 

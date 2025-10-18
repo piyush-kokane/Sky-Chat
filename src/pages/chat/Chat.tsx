@@ -82,10 +82,6 @@ function Chat() {
       {/* Profile Panel */}
       {showProfilePanel &&
         <ProfilePanel
-          userImage={userData.userImage}
-          userName={userData.userName}
-          userContact={userData.userContact}
-          onIconClick={toggleDpPanel}
           onCancelClick={toggleProfilePanel}
         />
       }

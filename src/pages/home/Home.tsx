@@ -1,10 +1,9 @@
 import {  useState, useRef, useEffect  } from "react";
-import { useAuth } from "react-oidc-context";
+import { useUser } from "@hooks/UserContext.tsx";
 import { useTheme } from "@hooks/useTheme";
 import ChatItem from '@components/ChatListItem'
 import NewChatPanel from '@/panel/NewChat'
 import ProfilePanel from '@/panel/Profile'
-import DpDisplay from '@/panel/DpDisplay'
 import './Home.css'
 
 
@@ -107,12 +106,7 @@ const chatList = [
 
 
 function Home() {
-  const auth = useAuth();
-
   const { isDark, toggleTheme } = useTheme();
-
-  const [showDpPanel, setDpPanel] = useState(false);
-  const toggleDpPanel = () => setDpPanel(!showDpPanel)
 
   const [showNewChatPanel, setNewChatPanel] = useState(false);
   const toggleNewChatPanel = () => setNewChatPanel(!showNewChatPanel)
@@ -130,20 +124,7 @@ function Home() {
       {/* Profile Panel */}
       {showProfilePanel &&
         <ProfilePanel
-          userImage={userData?.userImage}
-          userName={userData?.userName}
-          userContact={auth.user?.profile.email}
-          onIconClick={toggleDpPanel}
           onCancelClick={toggleProfilePanel}
-        />
-      }
-
-
-      {/* DP Panel */}
-      {showDpPanel && 
-        <DpDisplay 
-          onCancelClick={toggleDpPanel}
-          userImage={userData?.userImage}
         />
       }
 
