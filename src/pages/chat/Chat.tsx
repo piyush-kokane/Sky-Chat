@@ -10,11 +10,7 @@ import './Chat.css'
 
 
 
-const userData = {
-  userImage: "https://chat-portfolio-dhanushnehru.netlify.app/images/dp.jpg", // user profile image
-  userName: "Piyush Kokane",
-  userContact: "8806808503",
-};
+
 
 const chatUserData = {
   userImage: "https://chat-portfolio-dhanushnehru.netlify.app/images/dp.jpg", // user profile image
@@ -50,8 +46,6 @@ const messages = [
 
 
 function Chat() { 
-  const auth = useAuth();
-  
   const { isDark, toggleTheme } = useTheme();
 
   const [showDpPanel, setDpPanel] = useState(false);

@@ -29,11 +29,15 @@ function ChatListItem({
 
   const [imgError, setImgError] = useState(false);
   
+  const handleClick = () => {
+    if (!header)
+      navigate(`/chat/${userName}`)
+  };
 
   return (
     <div 
       className={`chat-item ${header ? "style-header" : "style-list"}`}
-      onClick={() => {if (!header) navigate("/chat")}}
+      onClick={handleClick}
     >
 
       {header &&

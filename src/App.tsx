@@ -30,7 +30,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/home" element={<ProtectedRoute element={<Home />} />} />
-        <Route path="/chat" element={<ProtectedRoute element={<Chat />} />} />
+        <Route path="/chat/:username" element={<ProtectedRoute element={<Chat />} />} />
       </Routes>
     </>
   );
