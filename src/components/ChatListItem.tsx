@@ -64,7 +64,7 @@ function ChatListItem({
         onClick={onIconClick}
       >
         <img
-          src={imgError ? fallbackImg : userImage}
+          src={(imgError || !userImage) ? fallbackImg : userImage}
           alt="DP"
           onError={() => setImgError(true)}
         />

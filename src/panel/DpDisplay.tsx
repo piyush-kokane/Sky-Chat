@@ -27,7 +27,7 @@ function DpDisplay({
       >
         <img
         className={imgError ? "p-8" : ""}
-          src={imgError ? fallbackImg : userImage}
+          src={(imgError || !userImage) ? fallbackImg : userImage}
           alt="DP"
           onError={() => setImgError(true)}
         />

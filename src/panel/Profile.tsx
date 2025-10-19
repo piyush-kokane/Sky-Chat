@@ -64,7 +64,7 @@ function ProfilePanel({ onCancelClick }: ProfilePanelProp) {
           {/* Profile */}
           <div className="profile-container">
             <img
-              src={imgError ? fallbackImg : userData?.userImage}
+              src={imgError ? fallbackImg : userData?.userImage || fallbackImg}
               alt="DP"
               onClick={toggleDpPanel}
               onError={() => setImgError(true)}
