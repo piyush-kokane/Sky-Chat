@@ -1,12 +1,13 @@
 import { useState, useRef, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { useAuth } from "react-oidc-context";
 import { useTheme } from "@hooks/useTheme";
+
 import sendImg from "@assets/send-btn.svg";
 import ChatItem from '@components/ChatListItem'
 import MessageItem from '@components/Message'
 import DpDisplay from '@/panel/DpDisplay'
 import ProfilePanel from '@/panel/Profile'
+
 import './Chat.css'
 
 

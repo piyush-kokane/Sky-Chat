@@ -1,5 +1,5 @@
+/* Debug Mode - enable to use test database */
 export const debugMode = true;
-
 
 
 /* Logedin User (Debug only) */
@@ -7,6 +7,8 @@ export const logedinAs = "Piyush";  // "Piyush", "Advait", "Onkar"
 
 
 
+ /* ---------------------------------------------------------------------------------------------------- */
+/* Users */
 export interface UserData {
   userImage: string;
   userName: string;
@@ -37,6 +39,8 @@ export const users: Record<string, UserData> = {
 
 
 
+ /* ---------------------------------------------------------------------------------------------------- */
+/* User Chat List */
 export interface UsersChatList {
   userImage: string;
   userName: string;

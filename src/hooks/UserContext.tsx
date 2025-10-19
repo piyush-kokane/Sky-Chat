@@ -25,7 +25,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
 
 
   useEffect(() => {
-    // Debug Mode - load static test user
+    // Debug Mode - load user from test database
     if (debugMode) {
       const selectedUser = users[logedinAs];
       setUserData(selectedUser || null);
