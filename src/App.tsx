@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { Toaster, toast } from "react-hot-toast";
 import { useAuth } from "react-oidc-context";
+import { debugMode } from "@/dataset/Users"; 
 import type { ReactElement } from "react";
 
 import Landing from "@pages/landing/Landing";
@@ -9,12 +10,16 @@ import Chat from "@pages/chat/Chat";
 
 import "./App.css";
 
+
+
 function ProtectedRoute({ element }: { element: ReactElement }) {
   const { isAuthenticated, isLoading } = useAuth();
 
+  if (debugMode) return element; // if debugMode dont check for authentication
+
   if (isLoading) return <p>Loading...</p>;
 
-  if (isAuthenticated) {
+  if (!isAuthenticated) {
     toast.success("Please Login first");
     return <Navigate to="/" replace />;
   }

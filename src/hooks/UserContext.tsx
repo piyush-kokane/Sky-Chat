@@ -1,12 +1,14 @@
 import { createContext, useContext, useState, useEffect, type ReactNode } from "react";
+import { users, debugMode, logedinAs } from "@/dataset/Users";
 import { useAuth } from "react-oidc-context";
+
+
 
 interface UserData {
   userImage: string;
   userName: string;
   displayName: string;
   userContact: string;
-  email?: string;
 }
 
 interface UserContextType {
@@ -18,22 +20,34 @@ const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
   const { user, isAuthenticated } = useAuth();
+  
   const [userData, setUserData] = useState<UserData | null>(null);
 
 
   useEffect(() => {
-    if (!isAuthenticated && !user) {
-      // You can modify this to fetch from your backend instead
+    // Debug Mode - load static test user
+    if (debugMode) {
+      const selectedUser = users[logedinAs]; // 
+      setUserData(selectedUser || null);
+      return; // prevents executing Normal Mode
+    }
+
+    // Normal Mode - fetch from database
+    if (isAuthenticated && user) {
+      const name = user.profile.name;
+
+      // *fetch data from database
+
+      // *setUserData
       setUserData({
-        userImage: "https://randomuser.me/api/portraits/men/1.jpg",
-        userName: "piyush_kokane",
-        displayName: "Piyush Kokane",
-        userContact: "8806808503",
-        email: "user@gmail.com",
+        userImage: "",
+        userName: "",
+        displayName: "",
+        userContact: "",
       });
     }
     else {
-      setUserData(null);
+      setUserData(null); // remove user data on logout
     }
   }, [isAuthenticated, user]);
 

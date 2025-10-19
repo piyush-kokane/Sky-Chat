@@ -6,12 +6,12 @@ import './styles/ChatListItem.css'
 
 interface ChatListItemProps {
   header: boolean; // style type
-  userImage: string;
-  userName: string;
-  displayName: string;
-  Text: string;
-  Time: string;
-  messageCount: number;
+  userImage?: string;
+  userName?: string;
+  displayName?: string;
+  Text?: string;
+  Time?: string;
+  messageCount?: number;
   onIconClick?: () => void;
 }
 
@@ -23,7 +23,7 @@ function ChatListItem({
   displayName,
   Text,
   Time,
-  messageCount,
+  messageCount = 0,
   onIconClick,
 }: ChatListItemProps) {
 
