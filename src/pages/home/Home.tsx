@@ -1,117 +1,37 @@
 import {  useState, useRef, useEffect  } from "react";
+import { logedinAs, users, usersChatList } from "@/dataset/Users"; 
 import { useUser } from "@hooks/UserContext.tsx";
 import { useTheme } from "@hooks/useTheme";
+
 import ChatItem from '@components/ChatListItem'
 import NewChatPanel from '@/panel/NewChat'
 import ProfilePanel from '@/panel/Profile'
+
 import './Home.css'
-
-
-
- /* ---------------------------------------------------------------------------------------------------- */
-/* Logedin User */
-const logedinAs = "Onkar";  // "Piyush", "Advait", "Onkar"
-
-
-
- /* ---------------------------------------------------------------------------------------------------- */
-/* Interface */
-
-interface UserData {
-  userImage: string;
-  userName: string;
-  displayName: string;
-  userContact: string;
-}
-
-interface UsersChatList {
-  userImage: string;
-  userName: string;
-  displayName: string;
-  Text: string;
-  Time: string;
-  messageCount: number;
-}
-
-
-
- /* ---------------------------------------------------------------------------------------------------- */
-/* Database */
-
-const users: Record<string, UserData> = {
-  Piyush: {
-    userImage: "https://randomuser.me/api/portraits/men/1.jpg",
-    userName: "piyush_kokane",
-    displayName: "Piyush Kokane",
-    userContact: "8806808503",
-  },
-
-  Advait: {
-    userImage: "https://randomuser.me/api/portraits/men/2.jpg",
-    userName: "advait_more",
-    displayName: "Advait More",
-    userContact: "8806808503",
-  },
-
-  Onkar: {
-    userImage: "https://randomuser.me/api/portraits/men/3.jpg",
-    userName: "onkar_kale",
-    displayName: "Onkar Kale",
-    userContact: "8806808503",
-  },
-};
-
-const usersChatList: Record<string, UsersChatList[]> = {
-  Piyush: [
-    { userImage: "https://randomuser.me/api/portraits/men/10.jpg", userName: "dhanush_nehru", displayName: "Dhanush Nehru", Text: "Typing...", Time: "12:15 PM", messageCount: 3 },
-    { userImage: "https://randomuser.me/api/portraits/women/20.jpg", userName: "sarah_lee", displayName: "Sarah Lee", Text: "Sent a photo", Time: "Yesterday", messageCount: 2 },
-    { userImage: "https://randomuser.me/api/portraits/men/30.jpg", userName: "john_doe", displayName: "John Doe", Text: "Online", Time: "10:30 AM", messageCount: 0 },
-  ],
-
-  Advait: [
-    { userImage: "https://randomuser.me/api/portraits/men/40.jpg", userName: "michael_scott", displayName: "Michael Scott", Text: "Last seen today", Time: "11:45 AM", messageCount: 1 },
-    { userImage: "https://randomuser.me/api/portraits/women/50.jpg", userName: "pam_beesly", displayName: "Pam Beesly", Text: "Sent a file", Time: "Yesterday", messageCount: 4 },
-    { userImage: "https://randomuser.me/api/portraits/men/60.jpg", userName: "jim_halpert", displayName: "Jim Halpert", Text: "Online", Time: "09:20 AM", messageCount: 0 },
-  ],
-
-  Onkar: [
-    { userImage: "https://randomuser.me/api/portraits/men/70.jpg", userName: "dwight_schrute", displayName: "Dwight Schrute", Text: "Typing...", Time: "12:00 PM", messageCount: 2 },
-    { userImage: "https://randomuser.me/api/portraits/women/80.jpg", userName: "angela_martin", displayName: "Angela Martin", Text: "Sent a message", Time: "Yesterday", messageCount: 1 },
-    { userImage: "https://randomuser.me/api/portraits/men/90.jpg", userName: "kevin_malone", displayName: "Kevin Malone", Text: "Online", Time: "08:45 AM", messageCount: 0 },
-  ],
-};
-
-
-
- /* ---------------------------------------------------------------------------------------------------- */
-/* Data */
-
-const userData: UserData = users[logedinAs];
-
-const _chatList: UsersChatList[] = usersChatList[logedinAs];
-
-
-// Add 'You' to chat list
-const chatList = [
-  {
-    userImage: userData.userImage,
-    userName: userData.userName,
-    displayName: userData.displayName + " (You)",
-    Text: "This is me !!!",
-    Time: "Now",
-    messageCount: 0,
-  },
-  ..._chatList,
-];
-
-
-
 
 
 
 
 
 function Home() {
+  const { userData } = useUser();
+
+  const _chatList = usersChatList[logedinAs];
+
+
+  // Add 'You' to chat list
+  const chatList = [
+    {
+      userImage: userData?.userImage,
+      userName: userData?.userName,
+      displayName: userData?.displayName + " (You)",
+      Text: "This is me !!!",
+      Time: "Now",
+      messageCount: 0,
+    },
+    ..._chatList,
+  ];
+
   const { isDark, toggleTheme } = useTheme();
 
   const [showNewChatPanel, setNewChatPanel] = useState(false);
