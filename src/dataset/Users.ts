@@ -23,12 +23,14 @@ export const users: Record<string, UserData> = {
     displayName: "Piyush Kokane",
     userContact: "8806808503",
   },
+
   Advait: {
     userImage: "https://randomuser.me/api/portraits/men/2.jpg",
     userName: "advait_more",
     displayName: "Advait More",
     userContact: "8806808503",
   },
+  
   Onkar: {
     userImage: "https://randomuser.me/api/portraits/men/3.jpg",
     userName: "onkar_kale",

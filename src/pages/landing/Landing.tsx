@@ -1,4 +1,6 @@
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "react-oidc-context";
+import { debugMode } from "@/dataset/Users"; 
 import icon from "@assets/SkyChat-logo.png"
 import './Landing.css'
 
@@ -6,13 +8,18 @@ import './Landing.css'
 
 function Landing() {
   const auth = useAuth();
+  const navigate = useNavigate();
 
   const handleSignin = () => {
-    auth.signinRedirect()
+    debugMode
+    ? navigate("/home")
+    : auth.signinRedirect()
   };
 
   const handleSignup = () => {
-    auth.signinRedirect({ prompt: "signup" })
+    debugMode
+    ? navigate("/home")
+    : auth.signinRedirect({ prompt: "signup" })
   };
 
   return (
