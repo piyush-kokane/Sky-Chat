@@ -1,11 +1,13 @@
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useTheme } from "@hooks/useTheme";
 import { useUser } from "@hooks/UserContext.tsx";
+import { useAuth } from "react-oidc-context";
+import { debugMode } from "@/dataset/dataset";
 
 import fallbackImg from "@assets/default-user.png"; // fallback image
 import ToggleSwitch from "@components/ToggleSwitch";
 import DpDisplay from '@/panel/DpDisplay'
-import { useAuth } from "react-oidc-context";
 
 import './styles/Profile.css'
 
@@ -18,6 +20,8 @@ interface ProfilePanelProp {
 
 function ProfilePanel({ onCancelClick }: ProfilePanelProp) {
   const auth = useAuth();
+
+  const navigate = useNavigate();
 
   const { userData } = useUser();
 
@@ -32,11 +36,16 @@ function ProfilePanel({ onCancelClick }: ProfilePanelProp) {
 
 
   const handleLogout = () => {
-    const logoutUri = window.location.origin; // http://localhost:5173/
-    const cognitoDomain = "https://us-east-1xillukbyv.auth.us-east-1.amazoncognito.com";
-    auth.removeUser(); // remove tokens from localStorage
-    window.location.href = `${cognitoDomain}/logout?client_id=1sel5r7k42ls80ubk82fsv5uel&logout_uri=${encodeURIComponent(logoutUri)}`;
-  };
+    if (debugMode) {
+      navigate("/")
+    }
+    else {
+      const logoutUri = window.location.origin; // http://localhost:5173/
+      const cognitoDomain = "https://us-east-1xillukbyv.auth.us-east-1.amazoncognito.com";
+      auth.removeUser(); // remove tokens from localStorage
+      window.location.href = `${cognitoDomain}/logout?client_id=1sel5r7k42ls80ubk82fsv5uel&logout_uri=${encodeURIComponent(logoutUri)}`;
+    }
+ };
 
 
   return (

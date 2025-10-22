@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect, type ReactNode } from "react";
-import { users, debugMode, logedinAs } from "@/dataset/Users";
+import { users, debugMode, logedinAs } from "@/dataset/dataset";
 import { useAuth } from "react-oidc-context";
 
 

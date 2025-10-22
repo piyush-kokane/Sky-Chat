@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "react-oidc-context";
-import { debugMode } from "@/dataset/Users"; 
+import { debugMode } from "@/dataset/dataset"; 
 import icon from "@assets/SkyChat-logo.png"
 import './Landing.css'
 

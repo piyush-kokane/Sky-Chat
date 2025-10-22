@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useTheme } from "@hooks/useTheme";
-import { messages } from "@/dataset/Users";
+import { messages } from "@/dataset/dataset";
 
 import sendImg from "@assets/send-btn.svg";
 import ChatItem from '@components/ChatListItem'

@@ -1,7 +1,7 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { Toaster, toast } from "react-hot-toast";
 import { useAuth } from "react-oidc-context";
-import { debugMode } from "@/dataset/Users"; 
+import { debugMode } from "@/dataset/dataset"; 
 import type { ReactElement } from "react";
 
 import Landing from "@pages/landing/Landing";
