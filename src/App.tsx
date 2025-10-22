@@ -4,9 +4,9 @@ import { useAuth } from "react-oidc-context";
 import { debugMode } from "@/dataset/dataset"; 
 import type { ReactElement } from "react";
 
-import Landing from "@pages/landing/Landing";
-import Home from "@pages/home/Home";
-import Chat from "@pages/chat/Chat";
+import Landing from "@pages/Landing";
+import Home from "@pages/Home";
+import Chat from "@pages/Chat";
 
 import "./App.css";
 

@@ -9,7 +9,7 @@ import MessageItem from '@components/Message'
 import DpDisplay from '@/panel/DpDisplay'
 import ProfilePanel from '@/panel/Profile'
 
-import './Chat.css'
+import '@pages/styles/Chat.css'
 
 
 

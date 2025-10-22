@@ -7,7 +7,7 @@ import ChatItem from '@components/ChatListItem'
 import NewChatPanel from '@/panel/NewChat'
 import ProfilePanel from '@/panel/Profile'
 
-import './Home.css'
+import '@pages/styles/Home.css'
 
 
 
