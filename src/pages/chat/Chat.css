@@ -51,6 +51,18 @@
     overflow-y: auto;
 }
 
+.date-separator {
+    align-self: center;
+    width: fit-content;
+    border-radius: 6px;
+    padding: 4px 12px;
+    margin: 6px 0;
+    font-size: 12px;
+    font-weight: 500;
+    background-color: var(--chat-received-bubble-color);
+    opacity: 0.7;
+}
+
 .message-bar-container {
     display: flex;
     flex-direction: row;
