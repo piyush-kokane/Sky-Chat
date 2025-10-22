@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useTheme } from "@hooks/useTheme";
+import { messages } from "@/dataset/Users";
 
 import sendImg from "@assets/send-btn.svg";
 import ChatItem from '@components/ChatListItem'
@@ -11,35 +12,6 @@ import ProfilePanel from '@/panel/Profile'
 import './Chat.css'
 
 
-
-
-
-const messages = [
-  { received: true,  date: "20/10/2025", time: "7:00 pm", text: "Hey! How are you?" },
-  { received: true,  date: "20/10/2025", time: "7:01 pm", text: "Did you get my email?" },
-  { received: false, date: "20/10/2025", time: "7:02 pm", text: "Hi! I'm good, thanks! Just saw it." },
-  { received: false, date: "20/10/2025", time: "7:03 pm", text: "I will reply in a bit." },
-  { received: true,  date: "20/10/2025", time: "7:04 pm", text: "No worries 😄" },
-
-  { received: false, date: "21/10/2025", time: "7:05 pm", text: "Also, did you finish the report?" },
-  { received: true,  date: "21/10/2025", time: "7:06 pm", text: "Yes, I did. Sending it now." },
-  { received: true,  date: "21/10/2025", time: "7:06 pm", text: "Check your inbox." },
-  { received: true,  date: "21/10/2025", time: "7:07 pm", text: "Let me know if there are any issues." },
-  { received: false, date: "21/10/2025", time: "7:08 pm", text: "Got it, thanks!" },
-  { received: false, date: "21/10/2025", time: "7:09 pm", text: "I'll review it tonight." },
-
-  { received: true,  date: "22/10/2025", time: "7:10 pm", text: "Perfect 👍" },
-  { received: false, date: "22/10/2025", time: "7:11 pm", text: "By the way, are we meeting tomorrow?" },
-  { received: true,  date: "22/10/2025", time: "7:12 pm", text: "Yes, at 10 AM in the office." },
-  { received: true,  date: "22/10/2025", time: "7:13 pm", text: "Don't forget to bring the documents." },
-
-  { received: false, date: "23/10/2025", time: "7:14 pm", text: "Sure, will do." },
-  { received: true,  date: "23/10/2025", time: "7:15 pm", text: "See you then!" },
-  { received: false, date: "23/10/2025", time: "7:16 pm", text: "See you 👋" },
-
-  { received: true,  date: "24/10/2025", time: "7:17 pm", text: "Good night!" },
-  { received: false, date: "24/10/2025", time: "7:18 pm", text: "Good night 😴" }
-];
 
 
 
