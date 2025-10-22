@@ -124,32 +124,6 @@ function Chat() {
 
 
       {/* Chats */}
-      {/* 
-      <div className="chat-container">
-        {messages.map((msg, i) => {
-          const prev = messages[i - 1];
-          const next = messages[i + 1];
-          const isFirst = !prev || prev.received !== msg.received;
-          const isLast = !next || next.received !== msg.received;
-
-          const showDate = msg.date !== lastDate;
-          lastDate = msg.date;
-          
-          return (
-            <div key={i}>
-              {showDate && <div className="date-separator">{msg.date}</div>}
-
-              <MessageItem
-                received={msg.received}
-                text={msg.text}
-                time={msg.time}
-              />
-            </div>
-          );
-        })}
-      </div>
-       */}
-
       <div className="chat-container">
         {messages.map((msg, i) => {
           const prev = messages[i - 1];
@@ -159,6 +133,10 @@ function Chat() {
           const isFirst = !prev || prev.received !== msg.received;
           const isLast = !next || next.received !== msg.received;
 
+          // Determine if date should show
+          const showDate = msg.date !== lastDate;
+          lastDate = msg.date;
+          
           // Parse time to Date object for comparison
           const parseTime = (timeStr: string) => {
             const [h, m] = timeStr.split(":");
@@ -179,14 +157,17 @@ function Chat() {
           }
 
           return (
-            <MessageItem
-              key={i}
-              received={msg.received}
-              showFooter={showFooter}
-              text={msg.text}
-              time={msg.time}
-              position={isFirst && isLast ? "single" : isFirst ? "first" : isLast ? "last" : "middle"}
-            />
+            <div className="flex flex-col" key={i}>
+              {showDate && <div className="date-separator">{msg.date}</div>}
+
+              <MessageItem
+                received={msg.received}
+                showFooter={showFooter}
+                text={msg.text}
+                time={msg.time}
+                position={isFirst && isLast ? "single" : isFirst ? "first" : isLast ? "last" : "middle"}
+              />
+            </div>
           );
         })}
       </div>
