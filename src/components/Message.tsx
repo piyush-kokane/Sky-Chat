@@ -4,6 +4,7 @@ import './styles/Message.css'
 
 interface MessageProps {
   received: boolean;
+  showFooter?: boolean;
   text: string,
   time: string,
   position?: "first" | "middle" | "last" | "single";
@@ -13,9 +14,10 @@ interface MessageProps {
 
 function Message({
   received,
+  showFooter = true,
   text,
   time,
-  position,
+  position = "single",
 
 }: MessageProps) {
 
@@ -23,10 +25,12 @@ function Message({
   return (
     <div className={`message-container ${received ? "received" : "sent"} ${position}`}>
       <p className="text">{text}</p>
-      <div className="footer">
-        <p className="time">{time}</p>
-        <p className="tick">✔</p>
-      </div>
+      {showFooter &&
+        <div className="footer">
+          <p className="time">{time}</p>
+          <p className="tick">✔</p>
+        </div>
+      }
     </div>
   );
 }

@@ -154,13 +154,35 @@ function Chat() {
         {messages.map((msg, i) => {
           const prev = messages[i - 1];
           const next = messages[i + 1];
+
+          // Determine position
           const isFirst = !prev || prev.received !== msg.received;
           const isLast = !next || next.received !== msg.received;
+
+          // Parse time to Date object for comparison
+          const parseTime = (timeStr: string) => {
+            const [h, m] = timeStr.split(":");
+            const isPM = timeStr.toLowerCase().includes("pm");
+            let hour = parseInt(h);
+            if (isPM && hour < 12) hour += 12;
+            if (!isPM && hour === 12) hour = 0;
+            return new Date(0, 0, 0, hour, parseInt(m));
+          };
+
+          // Determine if footer should show
+          let showFooter = true;
+          if (next && next.received === msg.received) {
+            const currentTime = parseTime(msg.time);
+            const nextTime = parseTime(next.time);
+            const diff = (nextTime.getTime() - currentTime.getTime()) / 1000 / 60; // difference in minutes
+            if (diff < 10) showFooter = false; // 10 minutes threshold
+          }
 
           return (
             <MessageItem
               key={i}
               received={msg.received}
+              showFooter={showFooter}
               text={msg.text}
               time={msg.time}
               position={isFirst && isLast ? "single" : isFirst ? "first" : isLast ? "last" : "middle"}
