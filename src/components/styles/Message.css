@@ -1,19 +1,87 @@
 .message-container {
+  position: relative;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  background-color: var(--chat-bubble-color);
   max-width: clamp(0px, 80%, 800px);
   padding: 8px 10px;
   border-radius: 10px;
-  align-self: flex-end;
-  position: relative;
 }
 
 .message-container.received {
   align-self: flex-start;
   background-color: var(--chat-received-bubble-color);
 }
+
+.message-container.sent {
+  align-items: flex-end;
+  align-self: flex-end;
+  background-color: var(--chat-bubble-color);
+}
+
+.message-container .text {
+  font-size: 15px;
+  line-height: 1.4;
+  text-align: left;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+
+/* --- shape grouping --- */
+.message-container.first::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 0;
+  height: 0;
+  border: 10px solid transparent;
+}
+
+.message-container.sent.first {
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 4px;
+
+  &::before {
+    right: -6px;
+    border-left-color: var(--chat-bubble-color);
+    border-right: 0;
+    border-top: 0;
+  }
+}
+
+.message-container.sent.middle {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+.message-container.sent.last {
+  border-top-right-radius: 4px;
+}
+
+.message-container.received.first {
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 4px;
+
+  &::before {
+    left: -6px;
+    border-right-color: var(--chat-received-bubble-color);
+    border-left: 0;
+    border-top: 0;
+  }
+}
+
+.message-container.received.middle {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.message-container.received.last {
+  border-top-left-radius: 4px;
+}
+
+
+/* --- time + tick layout --- */
 
 .message-container .footer {
   display: flex;
@@ -25,17 +93,6 @@
   margin-top: 4px;
 }
 
-.message-container .text {
-  font-size: 15px;
-  line-height: 1.4;
-  text-align: left;
-  align-self: flex-start;
-  word-wrap: break-word;
-  overflow-wrap: anywhere;
-  white-space: pre-wrap;
-}
-
 .message-container .tick {
     /* color: aqua; */
 }
-

@@ -15,34 +15,25 @@ import './Chat.css'
 
 
 const messages = [
-  { received: true, text: "Hello!", time: "7:00 pm" },
-  { received: false, text: "Hi! How are you?", time: "7:01 pm" },
-  { received: true, text: "I'm good, thanks!", time: "7:02 pm" },
-  { received: false, text: "Great 😊", time: "7:03 pm" },
-  { received: true, text: "Did you finish the project?", time: "7:04 pm" },
-  { received: false, text: "Almost done, just final touches.", time: "7:05 pm" },
-  { received: true, text: "Awesome!", time: "7:06 pm" },
-  { received: false, text: "Yes, will send it by evening.", time: "7:07 pm" },
-  { received: true, text: "Cool, looking forward to it.", time: "7:08 pm" },
-  { received: false, text: "Thanks 😎", time: "7:09 pm" },
-  { received: true, text: "Are we meeting tomorrow?", time: "7:10 pm" },
-  { received: false, text: "Yes, at 10 am?", time: "7:11 pm" },
-  { received: true, text: "Perfect!", time: "7:12 pm" },
-  { received: false, text: "Do you need me to bring anything?", time: "7:13 pm" },
-  { received: true, text: "No, just yourself 😄", time: "7:14 pm" },
-  { received: false, text: "Haha, sure!", time: "7:15 pm" },
-  { received: true, text: "See you tomorrow then.", time: "7:16 pm" },
-  { received: false, text: "See you 👋", time: "7:17 pm" },
-  { received: true, text: "Good night!", time: "7:18 pm" },
-  { received: false, text: "Good night 😴", time: "7:19 pm" },
+  { received: true, text: "Hello!", time: "7:00 pm", date: "Today" },
+  { received: true, text: "Hello!", time: "7:00 pm", date: "Today" },
+  { received: true, text: "Hello!", time: "7:00 pm", date: "Today" },
+  { received: false, text: "Hi", time: "7:01 pm", date: "Today" },
+  { received: false, text: "Hi! How are you?", time: "7:01 pm", date: "Today" },
+  { received: false, text: "Hi! How are you?", time: "7:01 pm", date: "Today" },
+  { received: true, text: "I'm good, thanks!", time: "7:02 pm", date: "Today" },
+  { received: false, text: "Great 😊", time: "7:03 pm", date: "Today" },
+  { received: true, text: "Did you finish the project?", time: "7:04 pm", date: "Yesterday" },
+  { received: false, text: "Almost done, just final touches.", time: "7:05 pm", date: "Yesterday" },
+  { received: true, text: "Awesome!", time: "7:06 pm", date: "Yesterday" },
 ];
 
 
 
 function Chat() { 
   const location = useLocation();
-  
-  const chatUserData = location.state as {
+
+    const chatUserData = location.state as {
     userImage: string;
     userName: string;
     displayName: string;
@@ -51,13 +42,20 @@ function Chat() {
     messageCount: number;
   };
 
+  
+  let lastDate = "";
+
+
   const { isDark, toggleTheme } = useTheme();
+
 
   const [showDpPanel, setDpPanel] = useState(false);
   const toggleDpPanel = () => setDpPanel(!showDpPanel)
   
+
   const [showProfilePanel, setProfilePanel] = useState(false);
   const toggleProfilePanel = () => setProfilePanel(!showProfilePanel)
+
 
   const [message, setMessage] = useState("");
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -70,6 +68,9 @@ function Chat() {
       textarea.style.height = `${textarea.scrollHeight}px`;
     }
   }, [message]);
+
+
+
 
 
   return (
@@ -114,15 +115,49 @@ function Chat() {
 
 
       {/* Chats */}
+      {/* 
       <div className="chat-container">
-        {messages.map((message, index) => (
-          <MessageItem
-            key={index}
-            received={message.received}
-            text={message.text}
-            time={message.time}
-          />
-        ))}
+        {messages.map((msg, i) => {
+          const prev = messages[i - 1];
+          const next = messages[i + 1];
+          const isFirst = !prev || prev.received !== msg.received;
+          const isLast = !next || next.received !== msg.received;
+
+          const showDate = msg.date !== lastDate;
+          lastDate = msg.date;
+          
+          return (
+            <div key={i}>
+              {showDate && <div className="date-separator">{msg.date}</div>}
+
+              <MessageItem
+                received={msg.received}
+                text={msg.text}
+                time={msg.time}
+              />
+            </div>
+          );
+        })}
+      </div>
+       */}
+
+      <div className="chat-container">
+        {messages.map((msg, i) => {
+          const prev = messages[i - 1];
+          const next = messages[i + 1];
+          const isFirst = !prev || prev.received !== msg.received;
+          const isLast = !next || next.received !== msg.received;
+
+          return (
+            <MessageItem
+              key={i}
+              received={msg.received}
+              text={msg.text}
+              time={msg.time}
+              position={isFirst && isLast ? "single" : isFirst ? "first" : isLast ? "last" : "middle"}
+            />
+          );
+        })}
       </div>
 
 
