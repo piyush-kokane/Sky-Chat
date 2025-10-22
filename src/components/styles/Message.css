@@ -28,8 +28,10 @@
 }
 
 
+
 /* --- shape grouping --- */
-.message-container.first::before {
+
+.message-container.first::before, .message-container.single::before {
   content: "";
   position: absolute;
   top: 0;
@@ -38,16 +40,20 @@
   border: 10px solid transparent;
 }
 
+.message-container.sent.single {
+  border-top-right-radius: 0px;
+}
+
 .message-container.sent.first {
   border-top-right-radius: 0px;
   border-bottom-right-radius: 4px;
+}
 
-  &::before {
-    right: -6px;
-    border-left-color: var(--chat-bubble-color);
-    border-right: 0;
-    border-top: 0;
-  }
+.message-container.sent.first::before, .message-container.sent.single::before {
+  right: -6px;
+  border-left-color: var(--chat-bubble-color);
+  border-right: 0;
+  border-top: 0;
 }
 
 .message-container.sent.middle {
@@ -59,16 +65,20 @@
   border-top-right-radius: 4px;
 }
 
+.message-container.received.single {
+  border-top-left-radius: 0px;
+}
+
 .message-container.received.first {
   border-top-left-radius: 0px;
   border-bottom-left-radius: 4px;
+}
 
-  &::before {
-    left: -6px;
-    border-right-color: var(--chat-received-bubble-color);
-    border-left: 0;
-    border-top: 0;
-  }
+.message-container.received.first::before, .message-container.received.single::before {
+  left: -6px;
+  border-right-color: var(--chat-received-bubble-color);
+  border-left: 0;
+  border-top: 0;
 }
 
 .message-container.received.middle {
@@ -79,6 +89,7 @@
 .message-container.received.last {
   border-top-left-radius: 4px;
 }
+
 
 
 /* --- time + tick layout --- */

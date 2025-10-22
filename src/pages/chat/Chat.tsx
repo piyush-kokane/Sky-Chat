@@ -15,17 +15,26 @@ import './Chat.css'
 
 
 const messages = [
-  { received: true, text: "Hello!", time: "7:00 pm", date: "Today" },
-  { received: true, text: "Hello!", time: "7:00 pm", date: "Today" },
-  { received: true, text: "Hello!", time: "7:00 pm", date: "Today" },
-  { received: false, text: "Hi", time: "7:01 pm", date: "Today" },
-  { received: false, text: "Hi! How are you?", time: "7:01 pm", date: "Today" },
-  { received: false, text: "Hi! How are you?", time: "7:01 pm", date: "Today" },
-  { received: true, text: "I'm good, thanks!", time: "7:02 pm", date: "Today" },
-  { received: false, text: "Great 😊", time: "7:03 pm", date: "Today" },
-  { received: true, text: "Did you finish the project?", time: "7:04 pm", date: "Yesterday" },
-  { received: false, text: "Almost done, just final touches.", time: "7:05 pm", date: "Yesterday" },
-  { received: true, text: "Awesome!", time: "7:06 pm", date: "Yesterday" },
+  { received: true, text: "Hey! How are you?", time: "7:00 PM", date: "Mon" },
+  { received: true, text: "Did you get my email?", time: "7:01 PM", date: "Mon" },
+  { received: false, text: "Hi! I'm good, thanks! Just saw it.", time: "7:02 PM", date: "Mon" },
+  { received: false, text: "I will reply in a bit.", time: "7:03 PM", date: "Mon" },
+  { received: true, text: "No worries 😄", time: "7:04 PM", date: "Mon" },
+  { received: false, text: "Also, did you finish the report?", time: "7:05 PM", date: "Tue" },
+  { received: true, text: "Yes, I did. Sending it now.", time: "7:06 PM", date: "Tue" },
+  { received: true, text: "Check your inbox.", time: "7:06 PM", date: "Tue" },
+  { received: true, text: "Let me know if there are any issues.", time: "7:07 PM", date: "Tue" },
+  { received: false, text: "Got it, thanks!", time: "7:08 PM", date: "Tue" },
+  { received: false, text: "I'll review it tonight.", time: "7:09 PM", date: "Tue" },
+  { received: true, text: "Perfect 👍", time: "7:10 PM", date: "Wed" },
+  { received: false, text: "By the way, are we meeting tomorrow?", time: "7:11 PM", date: "Wed" },
+  { received: true, text: "Yes, at 10 AM in the office.", time: "7:12 PM", date: "Wed" },
+  { received: true, text: "Don't forget to bring the documents.", time: "7:13 PM", date: "Wed" },
+  { received: false, text: "Sure, will do.", time: "7:14 PM", date: "Thu" },
+  { received: true, text: "See you then!", time: "7:15 PM", date: "Thu" },
+  { received: false, text: "See you 👋", time: "7:16 PM", date: "Thu" },
+  { received: true, text: "Good night!", time: "7:17 PM", date: "Fri" },
+  { received: false, text: "Good night 😴", time: "7:18 PM", date: "Fri" },
 ];
 
 
