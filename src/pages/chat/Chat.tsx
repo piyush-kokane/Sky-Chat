@@ -15,27 +15,71 @@ import './Chat.css'
 
 
 const messages = [
-  { received: true, text: "Hey! How are you?", time: "7:00 pm", date: "Mon" },
-  { received: true, text: "Did you get my email?", time: "7:01 pm", date: "Mon" },
-  { received: false, text: "Hi! I'm good, thanks! Just saw it.", time: "7:02 pm", date: "Mon" },
-  { received: false, text: "I will reply in a bit.", time: "7:03 pm", date: "Mon" },
-  { received: true, text: "No worries 😄", time: "7:04 pm", date: "Mon" },
-  { received: false, text: "Also, did you finish the report?", time: "7:05 pm", date: "Tue" },
-  { received: true, text: "Yes, I did. Sending it now.", time: "7:06 pm", date: "Tue" },
-  { received: true, text: "Check your inbox.", time: "7:06 pm", date: "Tue" },
-  { received: true, text: "Let me know if there are any issues.", time: "7:07 pm", date: "Tue" },
-  { received: false, text: "Got it, thanks!", time: "7:08 pm", date: "Tue" },
-  { received: false, text: "I'll review it tonight.", time: "7:09 pm", date: "Tue" },
-  { received: true, text: "Perfect 👍", time: "7:10 pm", date: "Wed" },
-  { received: false, text: "By the way, are we meeting tomorrow?", time: "7:11 pm", date: "Wed" },
-  { received: true, text: "Yes, at 10 AM in the office.", time: "7:12 pm", date: "Wed" },
-  { received: true, text: "Don't forget to bring the documents.", time: "7:13 pm", date: "Wed" },
-  { received: false, text: "Sure, will do.", time: "7:14 pm", date: "Thu" },
-  { received: true, text: "See you then!", time: "7:15 pm", date: "Thu" },
-  { received: false, text: "See you 👋", time: "7:16 pm", date: "Thu" },
-  { received: true, text: "Good night!", time: "7:17 pm", date: "Fri" },
-  { received: false, text: "Good night 😴", time: "7:18 pm", date: "Fri" },
+  { received: true,  date: "20/10/2025", time: "7:00 pm", text: "Hey! How are you?" },
+  { received: true,  date: "20/10/2025", time: "7:01 pm", text: "Did you get my email?" },
+  { received: false, date: "20/10/2025", time: "7:02 pm", text: "Hi! I'm good, thanks! Just saw it." },
+  { received: false, date: "20/10/2025", time: "7:03 pm", text: "I will reply in a bit." },
+  { received: true,  date: "20/10/2025", time: "7:04 pm", text: "No worries 😄" },
+
+  { received: false, date: "21/10/2025", time: "7:05 pm", text: "Also, did you finish the report?" },
+  { received: true,  date: "21/10/2025", time: "7:06 pm", text: "Yes, I did. Sending it now." },
+  { received: true,  date: "21/10/2025", time: "7:06 pm", text: "Check your inbox." },
+  { received: true,  date: "21/10/2025", time: "7:07 pm", text: "Let me know if there are any issues." },
+  { received: false, date: "21/10/2025", time: "7:08 pm", text: "Got it, thanks!" },
+  { received: false, date: "21/10/2025", time: "7:09 pm", text: "I'll review it tonight." },
+
+  { received: true,  date: "22/10/2025", time: "7:10 pm", text: "Perfect 👍" },
+  { received: false, date: "22/10/2025", time: "7:11 pm", text: "By the way, are we meeting tomorrow?" },
+  { received: true,  date: "22/10/2025", time: "7:12 pm", text: "Yes, at 10 AM in the office." },
+  { received: true,  date: "22/10/2025", time: "7:13 pm", text: "Don't forget to bring the documents." },
+
+  { received: false, date: "23/10/2025", time: "7:14 pm", text: "Sure, will do." },
+  { received: true,  date: "23/10/2025", time: "7:15 pm", text: "See you then!" },
+  { received: false, date: "23/10/2025", time: "7:16 pm", text: "See you 👋" },
+
+  { received: true,  date: "24/10/2025", time: "7:17 pm", text: "Good night!" },
+  { received: false, date: "24/10/2025", time: "7:18 pm", text: "Good night 😴" }
 ];
+
+
+
+// Format date label: Today, Yesterday, Monday, or original date
+function formatChatDate(dateStr: string) {
+  const [day, month, year] = dateStr.split("/").map(Number);
+  const msgDate = new Date(year, month - 1, day);
+  const today = new Date();
+
+  // Remove time for accurate date comparison
+  const clean = (d: Date) => new Date(d.getFullYear(), d.getMonth(), d.getDate());
+
+  const diffTime = clean(today).getTime() - clean(msgDate).getTime();
+  const diffDays = diffTime / (1000 * 60 * 60 * 24);
+
+  if (diffDays === 0) return "Today";
+  if (diffDays === 1) return "Yesterday";
+
+  const weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+  // Within the last 7 days
+  if (diffDays < 7 && diffDays > 1) {
+    return weekDays[msgDate.getDay()];
+  }
+
+  // Otherwise, show full date
+  return dateStr;
+}
+
+
+
+// Parse time to Date object for comparison
+function parseTime(timeStr: string) {
+  const [h, m] = timeStr.split(":");
+  const isPM = timeStr.toLowerCase().includes("pm");
+  let hour = parseInt(h);
+  if (isPM && hour < 12) hour += 12;
+  if (!isPM && hour === 12) hour = 0;
+  return new Date(0, 0, 0, hour, parseInt(m));
+};
 
 
 
@@ -137,16 +181,6 @@ function Chat() {
           const showDate = msg.date !== lastDate;
           lastDate = msg.date;
           
-          // Parse time to Date object for comparison
-          const parseTime = (timeStr: string) => {
-            const [h, m] = timeStr.split(":");
-            const isPM = timeStr.toLowerCase().includes("pm");
-            let hour = parseInt(h);
-            if (isPM && hour < 12) hour += 12;
-            if (!isPM && hour === 12) hour = 0;
-            return new Date(0, 0, 0, hour, parseInt(m));
-          };
-
           // Determine if footer should show
           let showFooter = true;
           if (next && next.received === msg.received) {
@@ -158,7 +192,7 @@ function Chat() {
 
           return (
             <div className="flex flex-col" key={i}>
-              {showDate && <div className="date-separator">{msg.date}</div>}
+              {showDate && <div className="date-separator">{formatChatDate(msg.date)}</div>}
 
               <MessageItem
                 received={msg.received}
