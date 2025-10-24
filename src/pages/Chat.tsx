@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { useUser } from "@hooks/UserContext.tsx";
 import { useTheme } from "@hooks/useTheme";
 import { messages } from "@/dataset/dataset";
 
@@ -56,6 +57,10 @@ function parseTime(timeStr: string) {
 
 
 function Chat() { 
+  const { userData } = useUser();
+  const userName = userData?.userName;
+
+
   const location = useLocation();
 
     const chatUserData = location.state as {
@@ -146,8 +151,8 @@ function Chat() {
           const next = messages[i + 1];
 
           // Determine position
-          const isFirst = !prev || prev.received !== msg.received;
-          const isLast = !next || next.received !== msg.received;
+          const isFirst = !prev || prev.sender !== msg.sender;
+          const isLast = !next || next.sender !== msg.sender;
 
           // Determine if date should show
           const showDate = msg.date !== lastDate;
@@ -155,7 +160,7 @@ function Chat() {
           
           // Determine if footer should show
           let showFooter = true;
-          if (next && next.received === msg.received) {
+          if (next && next.sender === msg.sender) {
             const currentTime = parseTime(msg.time);
             const nextTime = parseTime(next.time);
             const diff = (nextTime.getTime() - currentTime.getTime()) / 1000 / 60; // difference in minutes
@@ -167,7 +172,7 @@ function Chat() {
               {showDate && <div className="date-separator">{formatChatDate(msg.date)}</div>}
 
               <MessageItem
-                received={msg.received}
+                received={(msg.sender === userName) ? false : true}
                 showFooter={showFooter}
                 text={msg.text}
                 time={msg.time}
