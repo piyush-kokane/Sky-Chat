@@ -16,8 +16,20 @@ import '@pages/styles/Chat.css'
 
 
 
-// Format date label: Today, Yesterday, Monday, or original date
-function formatChatDate(dateStr: string) {
+ /* ---------------------------------------------------------------------------------------------------- */
+/* Helper Functions */
+
+// Format time label: 24hr → 12hr & add 'am'/'pm'
+function formatTime(time: string): string {
+  let [hour, minute] = time.split(":").map(Number);
+  const ampm = hour >= 12 ? "pm" : "am";
+  hour = hour % 12 || 12; // convert 0 → 12 and 13–23 → 1–11
+  return `${hour}:${minute.toString().padStart(2, "0")} ${ampm}`;
+}
+
+
+// Format date label: (Today, Yesterday), (Monday - Sunday), or original date
+function formatDate(dateStr: string) {
   const [day, month, year] = dateStr.split("/").map(Number);
   const msgDate = new Date(year, month - 1, day);
   const today = new Date();
@@ -33,28 +45,28 @@ function formatChatDate(dateStr: string) {
 
   const weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
-  // Within the last 7 days
+  // if within last 7 days
   if (diffDays < 7 && diffDays > 1) {
     return weekDays[msgDate.getDay()];
   }
 
-  // Otherwise, show full date
+  // Else, show full date
   return dateStr;
 }
 
 
-
 // Parse time to Date object for comparison
 function parseTime(timeStr: string) {
-  const [h, m] = timeStr.split(":");
-  const isPM = timeStr.toLowerCase().includes("pm");
-  let hour = parseInt(h);
-  if (isPM && hour < 12) hour += 12;
-  if (!isPM && hour === 12) hour = 0;
-  return new Date(0, 0, 0, hour, parseInt(m));
+  const [hour, minute] = timeStr.split(":").map(Number);
+  return new Date(0, 0, 0, hour, minute);
 };
 
 
+
+
+
+ /* ---------------------------------------------------------------------------------------------------- */
+/* Main Function */
 
 function Chat() { 
   const { userData } = useUser();
@@ -147,6 +159,10 @@ function Chat() {
       {/* Chats */}
       <div className="chat-container">
         {messages.map((msg, i) => {
+          // Split dateTime → date + time
+          const [dateStr, timeStr] = msg.dateTime.split("|");
+
+          // Get previous & next message
           const prev = messages[i - 1];
           const next = messages[i + 1];
 
@@ -155,27 +171,28 @@ function Chat() {
           const isLast = !next || next.sender !== msg.sender;
 
           // Determine if date should show
-          const showDate = msg.date !== lastDate;
-          lastDate = msg.date;
+          const showDate = dateStr !== lastDate;
+          lastDate = dateStr;
           
           // Determine if footer should show
           let showFooter = true;
           if (next && next.sender === msg.sender) {
-            const currentTime = parseTime(msg.time);
-            const nextTime = parseTime(next.time);
+            const [ , nextTimeStr] = msg.dateTime.split("|");
+            const nextTime = parseTime(nextTimeStr);
+            const currentTime = parseTime(timeStr);
             const diff = (nextTime.getTime() - currentTime.getTime()) / 1000 / 60; // difference in minutes
             if (diff < 10) showFooter = false; // 10 minutes threshold
           }
 
           return (
             <div className="flex flex-col" key={i}>
-              {showDate && <div className="date-separator">{formatChatDate(msg.date)}</div>}
+              {showDate && <div className="date-separator">{formatDate(dateStr)}</div>}
 
               <MessageItem
                 received={(msg.sender === userName) ? false : true}
                 showFooter={showFooter}
                 text={msg.text}
-                time={msg.time}
+                time={formatTime(timeStr)}
                 position={isFirst && isLast ? "single" : isFirst ? "first" : isLast ? "last" : "middle"}
               />
             </div>

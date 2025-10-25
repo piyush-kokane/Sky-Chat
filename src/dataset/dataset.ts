@@ -142,47 +142,48 @@ export const allChats: Chat[] = [
 
 
 export const messages = [
-  { sender: "UserB", date: "20/10/2025", time: "7:00 pm", text: "Hey! How are you? 😊" },
-  { sender: "UserB", date: "20/10/2025", time: "7:01 pm", text: "Did you get my email? 📧" },
-  { sender: "piyush_kokane", date: "20/10/2025", time: "7:02 pm", text: "Hi! I'm good, thanks! Just saw it. 👍" },
-  { sender: "piyush_kokane", date: "20/10/2025", time: "7:03 pm", text: "I will reply in a bit." },
-  { sender: "piyush_kokane", date: "20/10/2025", time: "7:04 pm", text: "Also, did you finish the report? 📄" },
+  { sender: "UserB", dateTime: "20/10/2025|19:00", text: "Hey! How are you? 😊" },
+  { sender: "UserB", dateTime: "20/10/2025|19:01", text: "Did you get my email? 📧" },
+  { sender: "piyush_kokane", dateTime: "20/10/2025|19:02", text: "Hi! I'm good, thanks! Just saw it. 👍" },
+  { sender: "piyush_kokane", dateTime: "20/10/2025|19:03", text: "I will reply in a bit." },
+  { sender: "piyush_kokane", dateTime: "20/10/2025|19:04", text: "Also, did you finish the report? 📄" },
 
-  { sender: "UserB", date: "21/10/2025", time: "8:00 am", text: "Yes, I finished it last night. 🕘" },
-  { sender: "UserB", date: "21/10/2025", time: "8:01 am", text: "Sending it over now." },
-  { sender: "piyush_kokane", date: "21/10/2025", time: "8:05 am", text: "Great! I'll check it soon. 👀" },
+  { sender: "UserB", dateTime: "21/10/2025|08:00", text: "Yes, I finished it last night. 🕘" },
+  { sender: "UserB", dateTime: "21/10/2025|08:01", text: "Sending it over now." },
+  { sender: "piyush_kokane", dateTime: "21/10/2025|08:05", text: "Great! I'll check it soon. 👀" },
 
-  { sender: "UserB", date: "21/10/2025", time: "9:00 am", text: "Did you get a chance to look at it?" },
-  { sender: "UserB", date: "21/10/2025", time: "9:02 am", text: "Any feedback?" },
-  { sender: "UserB", date: "21/10/2025", time: "9:03 am", text: "Let me know if there are any issues." },
+  { sender: "UserB", dateTime: "21/10/2025|09:00", text: "Did you get a chance to look at it?" },
+  { sender: "UserB", dateTime: "21/10/2025|09:02", text: "Any feedback?" },
+  { sender: "UserB", dateTime: "21/10/2025|09:03", text: "Let me know if there are any issues." },
 
-  { sender: "piyush_kokane", date: "21/10/2025", time: "9:10 am", text: "Yes, looks good! 😄" },
-  { sender: "piyush_kokane", date: "21/10/2025", time: "9:12 am", text: "Just a small comment in section 3." },
+  { sender: "piyush_kokane", dateTime: "21/10/2025|09:10", text: "Yes, looks good! 😄" },
+  { sender: "piyush_kokane", dateTime: "21/10/2025|09:12", text: "Just a small comment in section 3." },
 
-  { sender: "UserB", date: "22/10/2025", time: "10:00 am", text: "Thanks, I updated it. ✏️" },
+  { sender: "UserB", dateTime: "22/10/2025|10:00", text: "Thanks, I updated it. ✏️" },
 
-  { sender: "piyush_kokane", date: "22/10/2025", time: "10:15 am", text: "Perfect 👍" },
-  { sender: "piyush_kokane", date: "22/10/2025", time: "10:16 am", text: "Let's send it to the client. 🚀" },
-  { sender: "piyush_kokane", date: "22/10/2025", time: "10:17 am", text: "Are you free for a quick call? ☎️" },
+  { sender: "piyush_kokane", dateTime: "22/10/2025|10:15", text: "Perfect 👍" },
+  { sender: "piyush_kokane", dateTime: "22/10/2025|10:16", text: "Let's send it to the client. 🚀" },
+  { sender: "piyush_kokane", dateTime: "22/10/2025|10:17", text: "Are you free for a quick call? ☎️" },
 
-  { sender: "UserB", date: "22/10/2025", time: "10:20 am", text: "Sure, give me 5 mins. ⏳" },
+  { sender: "UserB", dateTime: "22/10/2025|10:20", text: "Sure, give me 5 mins. ⏳" },
 
-  { sender: "piyush_kokane", date: "23/10/2025", time: "11:00 am", text: "Call went well. 😎" },
-  { sender: "piyush_kokane", date: "23/10/2025", time: "11:02 am", text: "Client approved the changes." },
+  { sender: "piyush_kokane", dateTime: "23/10/2025|11:00", text: "Call went well. 😎" },
+  { sender: "piyush_kokane", dateTime: "23/10/2025|11:02", text: "Client approved the changes." },
 
-  { sender: "UserB", date: "23/10/2025", time: "11:15 am", text: "Great! I'll prepare the next draft." },
-  { sender: "UserB", date: "23/10/2025", time: "11:16 am", text: "Should be ready by evening. 🌇" },
+  { sender: "UserB", dateTime: "23/10/2025|11:15", text: "Great! I'll prepare the next draft." },
+  { sender: "UserB", dateTime: "23/10/2025|11:16", text: "Should be ready by evening. 🌇" },
 
-  { sender: "piyush_kokane", date: "24/10/2025", time: "12:00 pm", text: "Got it, thanks. 🙏" },
-  { sender: "piyush_kokane", date: "24/10/2025", time: "12:05 pm", text: "Looking forward to it." },
+  { sender: "piyush_kokane", dateTime: "24/10/2025|12:00", text: "Got it, thanks. 🙏" },
+  { sender: "piyush_kokane", dateTime: "24/10/2025|12:05", text: "Looking forward to it." },
 
-  { sender: "UserB", date: "24/10/2025", time: "2:00 pm", text: "Here’s the updated draft. 📝" },
-  { sender: "UserB", date: "24/10/2025", time: "2:02 pm", text: "Let me know your thoughts." },
-  { sender: "UserB", date: "24/10/2025", time: "2:05 pm", text: "We can finalize it today." },
+  { sender: "UserB", dateTime: "24/10/2025|14:00", text: "Here’s the updated draft. 📝" },
+  { sender: "UserB", dateTime: "24/10/2025|14:02", text: "Let me know your thoughts." },
+  { sender: "UserB", dateTime: "24/10/2025|14:05", text: "We can finalize it today." },
 
-  { sender: "piyush_kokane", date: "24/10/2025", time: "2:10 pm", text: "Looks perfect! 😍" },
-  { sender: "piyush_kokane", date: "24/10/2025", time: "2:12 pm", text: "Thanks for the quick turnaround." },
+  { sender: "piyush_kokane", dateTime: "24/10/2025|14:10", text: "Looks perfect! 😍" },
+  { sender: "piyush_kokane", dateTime: "24/10/2025|14:12", text: "Thanks for the quick turnaround." },
 
-  { sender: "UserB", date: "25/10/2025", time: "6:00 pm", text: "No problem 😄" },
+  { sender: "UserB", dateTime: "25/10/2025|18:00", text: "No problem 😄" },
 ];
+
 
