@@ -17,6 +17,7 @@ export interface UserData {
   userName: string;
   displayName: string;
   userContact: string;
+  userChats?: string[];
 }
 
 export const users: Record<string, UserData> = {
@@ -25,6 +26,7 @@ export const users: Record<string, UserData> = {
     userName: "piyush_kokane",
     displayName: "Piyush Kokane",
     userContact: "8806808503",
+    userChats: [ "chat001", "chat001", "chat001" ]
   },
 
   Advait: {

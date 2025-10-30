@@ -12,27 +12,19 @@ app.use(cors());
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log("✅ Connected to MongoDB"))
+  .then(() => console.log("🟢 Connected to MongoDB"))
   .catch((err) => console.error("❌ MongoDB connection error:", err));
 
-// Route: add multiple users
-app.post("/api/users/add", async (req, res) => {
-  try {
-    const users = req.body;
-    const result = await User.insertMany(users, { ordered: false });
-    res.status(201).json({ message: "Users added successfully", result });
-  } catch (error) {
-    res.status(500).json({ message: "Error adding users", error });
-  }
-});
 
-// Route: get all users
+
+// Route: get user
 app.get("/api/users/:userName", async (req, res) => {
   try {
     const { userName } = req.params;
+    console.log("Fetching user:", userName);
 
-    // Exclude _id and __v fields
-    const user = await User.findOne({ userName }).select("-_id -__v");
+    const user = await User.findOne({ userName: userName.trim() }).select("-_id -__v");
+    console.log("Found user:", user);
 
     if (!user) {
       return res.status(404).json({ error: "User not found" });
