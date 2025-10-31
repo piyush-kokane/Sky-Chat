@@ -1,9 +1,11 @@
+import jwt from "jsonwebtoken";
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
 import User from "./models/User.js";
 import ChatList from "./models/ChatList.js";
+import { authenticateToken } from "./middleware/authMiddleware.js";
 
 dotenv.config();
 
@@ -17,11 +19,35 @@ mongoose.connect(process.env.MONGO_URI)
   .catch((err) => console.error("❌ MongoDB connection error:", err));
 
 
+app.post("/api/login", async (req, res) => {
+  const { username } = req.body;
+  console.log("loging:", username)
+  const payload = { userName: username };
+  const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "1h" });
+  res.json({ token });
+});
+/*
+app.post("/api/login", async (req, res) => {
+  const { username, password } = req.body;
+
+  const user = await User.findOne({ userName: username });
+  if (!user || user.password !== password) {
+    return res.status(401).json({ message: "Invalid credentials" });
+  }
+
+  // Create token payload
+  const payload = { username: user.userName };
+  const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "1h" });
+
+  res.json({ token });
+});
+*/
 
 // Get user
-app.get("/api/users/:username", async (req, res) => {
+app.get("/api/userdata/", authenticateToken, async (req, res) => {
   try {
-    const { username } = req.params;
+    const username = req.userName;
+    console.log("username: ", username)
     const user = await User.findOne({ userName: username.trim() }).select("-_id -__v");
     if (!user) return res.status(404).json({ error: "User not found" });
     res.json(user);
@@ -33,9 +59,9 @@ app.get("/api/users/:username", async (req, res) => {
 
 
 // GET all chats for a user
-app.get("/api/user/:username/chatlist", async (req, res) => {
+app.get("/api/chatlist", authenticateToken, async (req, res) => {
   try {
-    const { username } = req.params;
+    const username = req.userName;
     const user = await User.findOne({ userName: username });
     if (!user) return res.status(404).json({ message: "User not found" });
 

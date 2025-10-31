@@ -24,7 +24,11 @@ async function fetchChatListFromMongo(username: string): Promise<ChatList[]> {
   try {
     await new Promise((resolve) => setTimeout(resolve, 3000)); // Simulate server delay
     
-    const res = await fetch(`http://localhost:5000/api/user/${username}/chatlist`);
+    const token = localStorage.getItem("token"); // JWT token
+    const res = await fetch("http://localhost:5000/api/chatlist", { // api endpoint
+      headers: { Authorization: `Bearer ${token}` }
+    });
+
     if (!res.ok) throw new Error("Failed to fetch chats");
     const data = await res.json();
     console.log(data);
