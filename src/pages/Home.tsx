@@ -69,7 +69,7 @@ function Home() {
 
       {/* Header */}
       <div className="header">
-        <p> <h1>Sky</h1> <h2>Chat</h2> </p>
+        <div className="flex w-full"> <h1>Sky</h1> <h2>Chat</h2> </div>
 
         <span className="material-symbols-rounded" onClick={toggleTheme}>{isDark ? "wb_sunny" : "moon_stars"}</span>
         <span className="material-symbols-outlined" onClick={toggleProfilePanel}>more_vert</span>

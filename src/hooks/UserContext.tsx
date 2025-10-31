@@ -9,6 +9,7 @@ import { useAuth } from "react-oidc-context";
 async function fetchUserFromMongo() {
   try {
     const _username = "piyush_kokane"
+    await new Promise((resolve) => setTimeout(resolve, 3000)); // Simulate server delay
     const res = await fetch(`http://localhost:5000/api/users/${_username}`);
     if (!res.ok) throw new Error("Failed to fetch user");
 
