@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
 import User from "./models/User.js";
+import ChatDetails from "./models/ChatDetails.js";
 
 dotenv.config();
 
@@ -17,23 +18,34 @@ mongoose.connect(process.env.MONGO_URI)
 
 
 
-// Route: get user
+// Get user
 app.get("/api/users/:userName", async (req, res) => {
   try {
-    const { userName } = req.params;
-    console.log("Fetching user:", userName);
-
-    const user = await User.findOne({ userName: userName.trim() }).select("-_id -__v");
-    console.log("Found user:", user);
-
-    if (!user) {
-      return res.status(404).json({ error: "User not found" });
-    }
-
+    const { username } = req.params;
+    const user = await User.findOne({ userName: username.trim() }).select("-_id -__v");
+    if (!user) return res.status(404).json({ error: "User not found" });
     res.json(user);
-  } catch (error) {
-    console.error("Error fetching user:", error);
-    res.status(500).json({ error: "Failed to fetch user" });
+  }
+  catch (error) {
+    res.status(500).json({ message: "Error fetching user", error: error.message });
+  }
+});
+
+
+// GET all chats for a user
+app.get("/api/user/:username/chatdetails", async (req, res) => {
+  try {
+    const { username } = req.params;
+    const user = await User.findOne({ userName: username });
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    const chatIds = user.userChats;
+    const chats = await ChatDetails.find({ chatId: { $in: chatIds } }).select("-_id -__v");
+
+    res.json(chats);
+  }
+  catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
   }
 });
 

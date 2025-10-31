@@ -5,7 +5,7 @@ const userSchema = new mongoose.Schema({
   displayName: String,
   userContact: String,
   userImage: String,
-  userChats: [{ type: String }],
+  userChats: [ String ],
 });
 
 export default mongoose.model("User", userSchema);
