@@ -1,4 +1,5 @@
 import ReactDOM from "react-dom/client";
+import { StrictMode } from "react";
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom';
 import { AuthProvider } from "react-oidc-context";
@@ -20,11 +21,8 @@ const cognitoAuthConfig = {
   loadUserInfo: true,
 };
 
-
-const root = ReactDOM.createRoot(document.getElementById("root")!);
-
-
 createRoot(document.getElementById('root')!).render(
+  //<StrictMode>
     <AuthProvider {...cognitoAuthConfig}>
       <UserProvider>
         <BrowserRouter>
@@ -34,4 +32,5 @@ createRoot(document.getElementById('root')!).render(
         </BrowserRouter>
       </UserProvider>
     </AuthProvider>
+  //</StrictMode>
 )

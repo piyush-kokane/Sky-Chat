@@ -14,7 +14,7 @@ import "./App.css";
 
 function ProtectedRoute({ element }: { element: ReactElement }) {
   const { isAuthenticated, isLoading } = useAuth();
-
+  console.log("hello")
   if (debugMode) return element; // if debugMode dont check for authentication
 
   if (isLoading) return <p>Loading...</p>;

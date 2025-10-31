@@ -1,3 +1,4 @@
+import { Toaster, toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "react-oidc-context";
 import { debugMode } from "@/dataset/dataset"; 
@@ -11,20 +12,32 @@ function Landing() {
   const navigate = useNavigate();
 
   const handleSignin = () => {
-    debugMode
-    ? navigate("/home")
-    : auth.signinRedirect()
+    try {
+      debugMode
+      ? navigate("/home")
+      : auth.signinRedirect()
+    }
+    catch (error) {
+      toast.error("Problem logging in");
+    }
   };
 
   const handleSignup = () => {
-    debugMode
-    ? navigate("/home")
-    : auth.signinRedirect({ prompt: "signup" })
+    try {
+      debugMode
+      ? navigate("/home")
+      : auth.signinRedirect({ prompt: "signup" })
+    }
+    catch (error) {
+      toast.error("Problem logging in");
+    }
   };
 
   return (
     <div className="landing-pg">
       <div className="landing-bg" />
+
+      <Toaster position="top-center" reverseOrder={false} />
 
       <img src={icon} />
       <span> <h1>Sky</h1> <h2>Chat</h2> </span>
