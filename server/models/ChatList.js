@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const chatDetailsSchema = new mongoose.Schema({
+const chatListSchema = new mongoose.Schema({
   chatId: { type: String, required: true, unique: true },
   chatImage: String,
   chatName: String,
@@ -9,4 +9,4 @@ const chatDetailsSchema = new mongoose.Schema({
   messageCount: Number
 });
 
-export default mongoose.model("ChatDetails", chatDetailsSchema, "chatDetails");
+export default mongoose.model("ChatList", chatListSchema, "chatList");

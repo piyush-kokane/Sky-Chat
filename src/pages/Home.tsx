@@ -1,5 +1,5 @@
 import {  useState, useRef, useEffect  } from "react";
-import { logedinAs, users, usersChatList } from "@/dataset/dataset"; 
+import { debugMode, logedinAs, users, usersChatList } from "@/dataset/dataset"; 
 import { useUser } from "@hooks/UserContext.tsx";
 import { useTheme } from "@hooks/useTheme";
 
@@ -11,28 +11,33 @@ import '@pages/styles/Home.css'
 
 
 
+interface ChatList {
+  chatId: string;
+  chatImage: string;
+  chatName: string;
+  text?: string;
+  time?: string;
+  messageCount?: number;
+}
 
+async function fetchChatListFromMongo(username: string): Promise<ChatList[]> {
+  try {
+    await new Promise((resolve) => setTimeout(resolve, 3000)); // Simulate server delay
+    
+    const res = await fetch(`http://localhost:5000/api/user/${username}/chatlist`);
+    if (!res.ok) throw new Error("Failed to fetch chats");
+    const data = await res.json();
+    console.log(data);
+    return data;
+  }
+  catch (error) {
+    console.error("Error fetching user:", error);
+    return [];
+  }
+}
 
 function Home() {
   const { userData } = useUser();
-
-  
-  const _chatList = usersChatList[logedinAs];
-
-
-  // Add 'You' to chat list
-  const chatList = [
-    {
-      userImage: userData?.userImage,
-      userName: userData?.userName,
-      displayName: userData?.displayName + " (You)",
-      Text: "This is me !!!",
-      Time: "Now",
-      messageCount: 0,
-    },
-    ..._chatList,
-  ];
-
   const { isDark, toggleTheme } = useTheme();
 
   const [showNewChatPanel, setNewChatPanel] = useState(false);
@@ -40,6 +45,34 @@ function Home() {
 
   const [showProfilePanel, setProfilePanel] = useState(false);
   const toggleProfilePanel = () => setProfilePanel(!showProfilePanel)
+
+  const [chatList, setChatList] = useState<ChatList[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const username = userData?.userName || "piyush_kokane";
+
+    //if (debugMode) {
+      setLoading(true);
+      fetchChatListFromMongo(username)
+        .then((data) => {
+          // Add 'You' to chat list
+          const youChat = {
+            chatId: userData?.userName || "piyush_kokane",
+            chatImage: userData?.userImage || "",
+            chatName: (userData?.displayName || "") + " (You)",
+            text: "This is me !!!",
+            time: "Now",
+            messageCount: 0,
+          };
+          setChatList([youChat, ...data]);
+        })
+        .finally(() => setLoading(false));
+    //}
+  }, [userData]);
+
+
+
 
 
   return (
@@ -83,11 +116,11 @@ function Home() {
           <ChatItem
             key={index}
             header={false}
-            userImage={user.userImage}
-            userName={user.userName}
-            displayName={user.displayName}
-            Text={user.Text}
-            Time={user.Time}
+            userImage={user.chatImage}
+            userName={user.chatId}
+            displayName={user.chatName}
+            Text={user.text}
+            Time={user.time}
             messageCount={user.messageCount}
           />
         ))}

@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
 import User from "./models/User.js";
-import ChatDetails from "./models/ChatDetails.js";
+import ChatList from "./models/ChatList.js";
 
 dotenv.config();
 
@@ -19,7 +19,7 @@ mongoose.connect(process.env.MONGO_URI)
 
 
 // Get user
-app.get("/api/users/:userName", async (req, res) => {
+app.get("/api/users/:username", async (req, res) => {
   try {
     const { username } = req.params;
     const user = await User.findOne({ userName: username.trim() }).select("-_id -__v");
@@ -33,14 +33,14 @@ app.get("/api/users/:userName", async (req, res) => {
 
 
 // GET all chats for a user
-app.get("/api/user/:username/chatdetails", async (req, res) => {
+app.get("/api/user/:username/chatlist", async (req, res) => {
   try {
     const { username } = req.params;
     const user = await User.findOne({ userName: username });
     if (!user) return res.status(404).json({ message: "User not found" });
 
     const chatIds = user.userChats;
-    const chats = await ChatDetails.find({ chatId: { $in: chatIds } }).select("-_id -__v");
+    const chats = await ChatList.find({ chatId: { $in: chatIds } }).select("-_id -__v");
 
     res.json(chats);
   }

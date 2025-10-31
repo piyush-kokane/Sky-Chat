@@ -4,17 +4,22 @@ import { useAuth } from "react-oidc-context";
 
 
 
+interface UserData {
+  userImage: string;
+  userName: string;
+  displayName: string;
+  userContact: string;
+  userChats: string[];
+}
 
-
-async function fetchUserFromMongo() {
+async function fetchUserFromMongo(): Promise<UserData | null> {
   try {
-    const _username = "piyush_kokane"
     await new Promise((resolve) => setTimeout(resolve, 3000)); // Simulate server delay
+
+    const _username = "piyush_kokane"
     const res = await fetch(`http://localhost:5000/api/users/${_username}`);
     if (!res.ok) throw new Error("Failed to fetch user");
-
     const data = await res.json();
-    console.log(data);
     return data;
   }
   catch (error) {
@@ -23,14 +28,6 @@ async function fetchUserFromMongo() {
   }
 }
 
-
-interface UserData {
-  userImage: string;
-  userName: string;
-  displayName: string;
-  userContact: string;
-  userChats: string[];
-}
 
 interface UserContextType {
   loading: boolean;
