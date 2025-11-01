@@ -12,11 +12,13 @@ import './styles/Profile.css'
 
 
 
+/* Interface */
 interface ProfilePanelProp {
   onCancelClick: () => void;
 }
 
 
+/* Main Function */
 function ProfilePanel({ onCancelClick }: ProfilePanelProp) {
   const auth = useAuth();
 
@@ -34,6 +36,7 @@ function ProfilePanel({ onCancelClick }: ProfilePanelProp) {
   const toggleDpPanel = () => setDpPanel(!showDpPanel)
 
 
+  /* Logout function */
   const handleLogout = () => {
 
     if (debugMode) {
@@ -48,9 +51,10 @@ function ProfilePanel({ onCancelClick }: ProfilePanelProp) {
       auth.removeUser(); // remove tokens from localStorage
       window.location.href = `${cognitoDomain}/logout?client_id=1sel5r7k42ls80ubk82fsv5uel&logout_uri=${encodeURIComponent(logoutUri)}`;
     }
- };
+  };
 
 
+  /* --- UI --- */
   return (
     <>
       {/* DP Panel */}

@@ -12,6 +12,8 @@ import "./App.css";
 
 
 
+
+
 function ProtectedRoute({ element }: { element: ReactElement }) {
   const { isAuthenticated, isLoading, logoutInProgress  } = useUser();
   

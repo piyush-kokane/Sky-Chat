@@ -2,11 +2,14 @@ import { useNavigate } from "react-router-dom";
 import './styles/NewChat.css'
 
 
+
+/* Interface */
 interface NewChatProp {
   onCancelClick: () => void;
 }
 
 
+/* Main Function */
 function NewChat({
   onCancelClick,
 }: NewChatProp) {

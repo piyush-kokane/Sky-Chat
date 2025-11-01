@@ -12,6 +12,8 @@ function Landing() {
   const { setAuthenticated } = useUser();
   const navigate = useNavigate();
 
+
+  /* Signin function */
   const handleSignin = () => {
     try {
       if (debugMode) {
@@ -27,6 +29,8 @@ function Landing() {
     }
   };
 
+
+  /* Signup function */
   const handleSignup = () => {
     try {
       if (debugMode) {
@@ -42,6 +46,9 @@ function Landing() {
     }
   };
 
+  
+
+  /* --- UI --- */
   return (
     <div className="landing-pg">
       <div className="landing-bg" />

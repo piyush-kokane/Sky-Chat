@@ -10,6 +10,8 @@ import '@pages/styles/Home.css'
 
 
 
+
+/* Interface */
 interface ChatList {
   chatId: string;
   chatImage: string;
@@ -19,6 +21,9 @@ interface ChatList {
   messageCount?: number;
 }
 
+
+
+/* Fetch chatList from MongoDB */
 async function fetchChatListFromMongo(): Promise<ChatList[]> {
   try {
     await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulate server delay
@@ -39,6 +44,9 @@ async function fetchChatListFromMongo(): Promise<ChatList[]> {
   }
 }
 
+
+
+/* Main Function */
 function Home() {
   const { userData, isLoading } = useUser();
   const { isDark, toggleTheme } = useTheme();
@@ -51,6 +59,7 @@ function Home() {
 
   const [chatList, setChatList] = useState<ChatList[]>([]);
   const [loadingChats, setLoadingChats] = useState(true);
+
 
   useEffect(() => {
     if (!userData || isLoading) return; // onlf fetch chats after userData is available 
@@ -76,8 +85,7 @@ function Home() {
 
 
 
-
-
+  /* --- UI --- */
   return (
     <div className="home-pg">
       {/* Background */}

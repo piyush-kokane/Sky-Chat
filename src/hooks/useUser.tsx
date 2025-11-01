@@ -5,11 +5,12 @@ import { useAuth } from "react-oidc-context";
 
 
 /* Debug Mode */
-export const debugMode = true; // true to use test database
+export const debugMode = true; // true → use test database
 export const logedinAs = "piyush_kokane"; // Logedin User (Debug only) - "piyush_kokane", "Advait", "Onkar"
 
 
 
+/* Set JWT Token */
 async function setToken(username: string) {
   try {
     const res = await fetch("http://localhost:5000/api/settoken", {
@@ -34,6 +35,7 @@ async function setToken(username: string) {
 
 
 
+/* Interfaces */
 interface UserData {
   userImage: string;
   userName: string;
@@ -41,8 +43,22 @@ interface UserData {
   userContact: string;
 }
 
+interface UserContextType {
+  isLoading: boolean;
+
+  logoutInProgress: boolean;
+  setLogoutInProgress:  (data: boolean) => void;
+
+  isAuthenticated: boolean;
+  setAuthenticated:  (data: boolean) => void;
+
+  userData: UserData | null;
+  setUserData: (data: UserData | null) => void;
+}
 
 
+
+/* Fetch serData from MongoDB */
 async function fetchUserFromMongo(): Promise<UserData | null> {
   try {
     await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulate server delay
@@ -65,25 +81,12 @@ async function fetchUserFromMongo(): Promise<UserData | null> {
 
 
 
-interface UserContextType {
-  isLoading: boolean;
-
-  logoutInProgress: boolean;
-  setLogoutInProgress:  (data: boolean) => void;
-
-  isAuthenticated: boolean;
-  setAuthenticated:  (data: boolean) => void;
-
-  userData: UserData | null;
-  setUserData: (data: UserData | null) => void;
-}
-
-
-
+/* Context Setup */
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
 
 
+/* Provider Component */
 export const UserProvider = ({ children }: { children: ReactNode }) => {
   const location = useLocation();
 
@@ -95,7 +98,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   const [userData, setUserData] = useState<UserData | null>(null);
 
 
-
+  /* --- User Fetch --- */
   useEffect(() => {
     if (!isAuthenticated) return;
 
@@ -111,7 +114,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
       return;                              // prevents executing Normal Mode
     }
 
-    // Normal Mode - fetch from database
+    // Normal Mode - fetch from Dynamo DB
     if (isAuthenticated && user) {
       const name = user.profile.name;
 
@@ -131,7 +134,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   }, [isAuthenticated]);
 
 
-  // logged out - reset flag
+  /* --- logged out, reset flag --- */
   useEffect(() => {
     if (!isAuthenticated) {
       setLogoutInProgress(false);
@@ -139,6 +142,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   }, [isAuthenticated, location.pathname]);
 
 
+  /* --- Provider return --- */
   return (
     <UserContext.Provider value={{ isLoading, logoutInProgress, setLogoutInProgress, isAuthenticated, setAuthenticated, userData, setUserData }}>
       {children}
@@ -147,6 +151,8 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
 };
 
 
+
+/* Custom Hook */
 export const useUser = () => {
   const context = useContext(UserContext);
   if (!context) throw new Error("useUser must be used within a UserProvider");

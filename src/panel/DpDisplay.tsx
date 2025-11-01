@@ -3,12 +3,15 @@ import fallbackImg from "@assets/default-user.png"; // fallback image
 import './styles/DpDisplay.css'
 
 
+
+/* Interface */
 interface DpDisplayProp {
   userImage?: string;
   onCancelClick: () => void;
 }
 
 
+/* Main Function */
 function DpDisplay({
   userImage,
   onCancelClick,
