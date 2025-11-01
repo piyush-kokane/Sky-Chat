@@ -1,9 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useTheme } from "@hooks/useTheme";
-import { useUser } from "@hooks/UserContext.tsx";
+import { useUser, debugMode } from "@hooks/UserContext.tsx";
 import { useAuth } from "react-oidc-context";
-import { debugMode } from "@/dataset/dataset";
 
 import fallbackImg from "@assets/default-user.png"; // fallback image
 import ToggleSwitch from "@components/ToggleSwitch";

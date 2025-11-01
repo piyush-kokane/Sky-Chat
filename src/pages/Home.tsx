@@ -1,5 +1,4 @@
 import {  useState, useRef, useEffect  } from "react";
-import { debugMode, logedinAs, users, usersChatList } from "@/dataset/dataset"; 
 import { useUser } from "@hooks/UserContext.tsx";
 import { useTheme } from "@hooks/useTheme";
 
@@ -20,7 +19,7 @@ interface ChatList {
   messageCount?: number;
 }
 
-async function fetchChatListFromMongo(username: string): Promise<ChatList[]> {
+async function fetchChatListFromMongo(): Promise<ChatList[]> {
   try {
     await new Promise((resolve) => setTimeout(resolve, 3000)); // Simulate server delay
     
@@ -54,11 +53,9 @@ function Home() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const username = userData?.userName || "piyush_kokane";
-
     //if (debugMode) {
       setLoading(true);
-      fetchChatListFromMongo(username)
+      fetchChatListFromMongo()
         .then((data) => {
           // Add 'You' to chat list
           const youChat = {

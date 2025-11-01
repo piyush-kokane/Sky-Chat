@@ -1,9 +1,9 @@
 /* Debug Mode - enable to use test database */
-export const debugMode = true;
+//export const debugMode = true;
 
 
 /* Logedin User (Debug only) */
-export const logedinAs = "Piyush";  // "Piyush", "Advait", "Onkar"
+//export const logedinAs = "piyush_kokane";  // "Piyush", "Advait", "Onkar"
 
 
 
@@ -11,7 +11,7 @@ export const logedinAs = "Piyush";  // "Piyush", "Advait", "Onkar"
 
  /* ---------------------------------------------------------------------------------------------------- */
 /* Users */
-
+/*
 export interface UserData {
   userImage: string;
   userName: string;
@@ -43,14 +43,14 @@ export const users: Record<string, UserData> = {
     userContact: "8806808503",
   },
 };
-
+*/
 
 
 
 
  /* ---------------------------------------------------------------------------------------------------- */
 /* User Chat List */
-
+/*
 export interface UsersChatList {
   userImage: string;
   userName: string;
@@ -79,7 +79,7 @@ export const usersChatList: Record<string, UsersChatList[]> = {
     { userImage: "https://randomuser.me/api/portraits/men/90.jpg", userName: "kevin_malone", displayName: "Kevin Malone", Text: "Online", Time: "08:45 AM", messageCount: 0 },
   ],
 };
-
+*/
 
 
 

@@ -1,8 +1,7 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { Toaster, toast } from "react-hot-toast";
-import { useUser } from "@hooks/UserContext.tsx";
+import { useUser, debugMode } from "@hooks/UserContext.tsx";
 import { useAuth } from "react-oidc-context";
-import { debugMode } from "@/dataset/dataset"; 
 import type { ReactElement } from "react";
 
 import Landing from "@pages/Landing";
@@ -18,7 +17,7 @@ function ProtectedRoute({ element }: { element: ReactElement }) {
   const { loading } = useUser();
   
   if (isLoading || loading) return <p>Loading...</p>;
-  
+
   if (debugMode) return element; // if debugMode dont check for authentication
 
   if (!isAuthenticated) {

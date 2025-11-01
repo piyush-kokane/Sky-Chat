@@ -16,12 +16,13 @@ app.use(cors());
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("🟢 Connected to MongoDB"))
-  .catch((err) => console.error("❌ MongoDB connection error:", err));
+  .catch((err) => console.error("🔴 MongoDB connection error:", err));
 
 
-app.post("/api/login", async (req, res) => {
+// Set JWT token
+app.post("/api/settoken", async (req, res) => {
   const { username } = req.body;
-  console.log("loging:", username)
+  console.log("loging as: ", username)
   const payload = { userName: username };
   const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "1h" });
   res.json({ token });
@@ -43,12 +44,12 @@ app.post("/api/login", async (req, res) => {
 });
 */
 
-// Get user
+// Get userData
 app.get("/api/userdata/", authenticateToken, async (req, res) => {
   try {
     const username = req.userName;
-    console.log("username: ", username)
-    const user = await User.findOne({ userName: username.trim() }).select("-_id -__v");
+    const user = await User.findOne({ userName: username.trim() }).select("-_id -__v -userChats");
+    console.log(user)
     if (!user) return res.status(404).json({ error: "User not found" });
     res.json(user);
   }
@@ -58,7 +59,7 @@ app.get("/api/userdata/", authenticateToken, async (req, res) => {
 });
 
 
-// GET all chats for a user
+// Get users chatList
 app.get("/api/chatlist", authenticateToken, async (req, res) => {
   try {
     const username = req.userName;

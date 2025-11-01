@@ -1,11 +1,17 @@
 import { createContext, useContext, useState, useEffect, type ReactNode } from "react";
-import { debugMode, logedinAs } from "@/dataset/dataset";
 import { useAuth } from "react-oidc-context";
 
 
-async function loginUser(username: string) {
+
+/* Debug Mode */
+export const debugMode = true; // true to use test database
+export const logedinAs = "piyush_kokane"; // Logedin User (Debug only) - "piyush_kokane", "Advait", "Onkar"
+
+
+
+async function setToken(username: string) {
   try {
-    const res = await fetch("http://localhost:5000/api/login", {
+    const res = await fetch("http://localhost:5000/api/settoken", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -13,16 +19,12 @@ async function loginUser(username: string) {
       body: JSON.stringify({ username }),
     });
 
-    if (!res.ok) throw new Error("Login failed");
-
+    if (!res.ok) throw new Error("Token failed");
     const data = await res.json();
-    console.log("Token:", data.token);
-
-    // Store token for later use
-    localStorage.setItem("token", data.token);
-
+    localStorage.setItem("token", data.token); // Store token for later use
     return data.token;
-  } catch (err) {
+  }
+  catch (err) {
     console.error("Error logging in:", err);
     return null;
   }
@@ -35,8 +37,9 @@ interface UserData {
   userName: string;
   displayName: string;
   userContact: string;
-  userChats: string[];
 }
+
+
 
 async function fetchUserFromMongo(): Promise<UserData | null> {
   try {
@@ -58,22 +61,31 @@ async function fetchUserFromMongo(): Promise<UserData | null> {
 }
 
 
+
 interface UserContextType {
   loading: boolean;
   userData: UserData | null;
   setUserData: (data: UserData) => void;
 }
 
+
+
 const UserContext = createContext<UserContextType | undefined>(undefined);
+
+
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
   const { user, isAuthenticated } = useAuth();
   const [loading, setLoading] = useState(false);
   const [userData, setUserData] = useState<UserData | null>(null);
 
-useEffect(() => {
-  loginUser("piyush_kokane");
-}, []);
+
+  // Set JWT token
+  useEffect(() => {
+    if (debugMode)
+      setToken(logedinAs);
+  }, []);
+
 
   useEffect(() => {
     // Debug Mode - load user from test database
@@ -98,7 +110,6 @@ useEffect(() => {
         userName: "",
         displayName: "",
         userContact: "",
-        userChats: [""],
       });
     }
     else {
