@@ -45,7 +45,7 @@ interface UserData {
 
 async function fetchUserFromMongo(): Promise<UserData | null> {
   try {
-    await new Promise((resolve) => setTimeout(resolve, 3000)); // Simulate server delay
+    await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulate server delay
 
     const token = localStorage.getItem("token"); // JWT token
     const res = await fetch("http://localhost:5000/api/userdata", { // api endpoint

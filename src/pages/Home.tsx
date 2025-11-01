@@ -21,7 +21,7 @@ interface ChatList {
 
 async function fetchChatListFromMongo(): Promise<ChatList[]> {
   try {
-    await new Promise((resolve) => setTimeout(resolve, 3000)); // Simulate server delay
+    await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulate server delay
     
     const token = localStorage.getItem("token"); // JWT token
     const res = await fetch("http://localhost:5000/api/chatlist", { // api endpoint
@@ -40,7 +40,7 @@ async function fetchChatListFromMongo(): Promise<ChatList[]> {
 }
 
 function Home() {
-  const { userData } = useUser();
+  const { userData, isLoading } = useUser();
   const { isDark, toggleTheme } = useTheme();
 
   const [showNewChatPanel, setNewChatPanel] = useState(false);
@@ -50,25 +50,27 @@ function Home() {
   const toggleProfilePanel = () => setProfilePanel(!showProfilePanel)
 
   const [chatList, setChatList] = useState<ChatList[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loadingChats, setLoadingChats] = useState(true);
 
   useEffect(() => {
+    if (!userData || isLoading) return; // onlf fetch chats after userData is available 
+
+    setLoadingChats(true);
     //if (debugMode) {
-      setLoading(true);
       fetchChatListFromMongo()
         .then((data) => {
           // Add 'You' to chat list
           const youChat = {
-            chatId: userData?.userName || "piyush_kokane",
-            chatImage: userData?.userImage || "",
-            chatName: (userData?.displayName || "") + " (You)",
+            chatId: userData.userName,
+            chatImage: userData.userImage,
+            chatName: (userData.displayName) + " (You)",
             text: "This is me !!!",
             time: "Now",
             messageCount: 0,
           };
           setChatList([youChat, ...data]);
         })
-        .finally(() => setLoading(false));
+        .finally(() => setLoadingChats(false));
     //}
   }, [userData]);
 
@@ -111,27 +113,33 @@ function Home() {
       </div>
 
 
-      {/* Chats List */}
-      <div className="chat-list">
-        {chatList.map((user, index) => (
-          <ChatItem
-            key={index}
-            header={false}
-            userImage={user.chatImage}
-            userName={user.chatId}
-            displayName={user.chatName}
-            Text={user.text}
-            Time={user.time}
-            messageCount={user.messageCount}
-          />
-        ))}
+      {/* Loading */}
+      {loadingChats && <p className="flex items-center justify-center h-screen">Loading chats...</p>}
 
-        <div className="footer">
-          <span className="material-symbols-outlined">lock</span>
-          <p>Your personal messages are</p>
-          <p>end-to-end encrypted</p>
+
+      {/* Chats List */}
+      {!loadingChats &&
+        <div className="chat-list">
+          {chatList.map((user, index) => (
+            <ChatItem
+              key={index}
+              header={false}
+              userImage={user.chatImage}
+              userName={user.chatId}
+              displayName={user.chatName}
+              Text={user.text}
+              Time={user.time}
+              messageCount={user.messageCount}
+            />
+          ))}
+
+          <div className="footer">
+            <span className="material-symbols-outlined">lock</span>
+            <p>Your personal messages are</p>
+            <p>end-to-end encrypted</p>
+          </div>
         </div>
-      </div>
+      }
 
     </div>
   );
