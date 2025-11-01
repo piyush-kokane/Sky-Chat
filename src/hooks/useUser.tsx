@@ -1,4 +1,5 @@
-import { createContext, useContext, useState, useEffect, type ReactNode } from "react";
+import { createContext, useContext, useState, useEffect, useRef, type ReactNode } from "react";
+import { useLocation } from "react-router-dom";
 import { useAuth } from "react-oidc-context";
 
 
@@ -22,6 +23,7 @@ async function setToken(username: string) {
     if (!res.ok) throw new Error("Token failed");
     const data = await res.json();
     localStorage.setItem("token", data.token); // Store token for later use
+    console.log("logedin, Token: ", data)
     return data.token;
   }
   catch (err) {
@@ -52,6 +54,7 @@ async function fetchUserFromMongo(): Promise<UserData | null> {
 
     if (!res.ok) throw new Error("Failed to fetch user");
     const data = await res.json();
+    console.log("fetching user: ", data)
     return data;
   }
   catch (error) {
@@ -63,9 +66,16 @@ async function fetchUserFromMongo(): Promise<UserData | null> {
 
 
 interface UserContextType {
-  loading: boolean;
+  isLoading: boolean;
+
+  logoutInProgress: boolean;
+  setLogoutInProgress:  (data: boolean) => void;
+
+  isAuthenticated: boolean;
+  setAuthenticated:  (data: boolean) => void;
+
   userData: UserData | null;
-  setUserData: (data: UserData) => void;
+  setUserData: (data: UserData | null) => void;
 }
 
 
@@ -75,27 +85,30 @@ const UserContext = createContext<UserContextType | undefined>(undefined);
 
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
-  const { user, isAuthenticated } = useAuth();
-  const [loading, setLoading] = useState(false);
+  const location = useLocation();
+
+  const { user } = useAuth();
+
+  const [isAuthenticated, setAuthenticated] = useState(localStorage.getItem("loggedin") === "true");
+  const [isLoading, setLoading] = useState(false);
+  const [logoutInProgress, setLogoutInProgress] = useState(false);
   const [userData, setUserData] = useState<UserData | null>(null);
 
 
-  // Set JWT token
-  useEffect(() => {
-    if (debugMode)
-      setToken(logedinAs);
-  }, []);
-
 
   useEffect(() => {
+    if (!isAuthenticated) return;
+
     // Debug Mode - load user from test database
     if (debugMode) {
-      setLoading(true);
-      fetchUserFromMongo()
-        .then((data) => setUserData(data))
-        .finally(() => setLoading(false));
+      setLoading(true);                    // set loading true
+
+      setToken(logedinAs)                  // set JWT token first
+        .then(() => fetchUserFromMongo())  // fetch userData
+        .then((data) => setUserData(data)) // setUserData
+        .finally(() => setLoading(false)); // set loading false
         
-      return; // prevents executing Normal Mode
+      return;                              // prevents executing Normal Mode
     }
 
     // Normal Mode - fetch from database
@@ -115,12 +128,19 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     else {
       setUserData(null); // remove user data on logout
     }
-  }, [isAuthenticated, user]);
+  }, [isAuthenticated]);
 
+
+  // logged out - reset flag
+  useEffect(() => {
+    if (!isAuthenticated) {
+      setLogoutInProgress(false);
+    }
+  }, [isAuthenticated, location.pathname]);
 
 
   return (
-    <UserContext.Provider value={{ loading, userData, setUserData }}>
+    <UserContext.Provider value={{ isLoading, logoutInProgress, setLogoutInProgress, isAuthenticated, setAuthenticated, userData, setUserData }}>
       {children}
     </UserContext.Provider>
   );

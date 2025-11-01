@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { useUser } from "@hooks/UserContext.tsx";
+import { useUser } from "@/hooks/useUser";
 import { useTheme } from "@hooks/useTheme";
 import { messages } from "@/dataset/dataset";
 

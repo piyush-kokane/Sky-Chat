@@ -1,6 +1,6 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { Toaster, toast } from "react-hot-toast";
-import { useUser, debugMode } from "@hooks/UserContext.tsx";
+import { useUser } from "@/hooks/useUser";
 import { useAuth } from "react-oidc-context";
 import type { ReactElement } from "react";
 
@@ -13,15 +13,13 @@ import "./App.css";
 
 
 function ProtectedRoute({ element }: { element: ReactElement }) {
-  const { isAuthenticated, isLoading } = useAuth();
-  const { loading } = useUser();
+  const { isAuthenticated, isLoading, logoutInProgress  } = useUser();
   
-  if (isLoading || loading) return <p>Loading...</p>;
-
-  if (debugMode) return element; // if debugMode dont check for authentication
+  if (isLoading) return <p>Loading...</p>;
 
   if (!isAuthenticated) {
-    toast.success("Please Login first");
+    if (!logoutInProgress)
+      toast.error("Please Login first");
     return <Navigate to="/" replace />;
   }
 

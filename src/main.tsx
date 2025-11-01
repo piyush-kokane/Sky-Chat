@@ -4,7 +4,7 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom';
 import { AuthProvider } from "react-oidc-context";
 import { ThemeProvider } from "@hooks/useTheme";
-import { UserProvider } from "@hooks/UserContext.tsx";
+import { UserProvider } from "@/hooks/useUser.tsx";
 import App from './App.tsx'
 import './index.css'
 
@@ -24,13 +24,13 @@ const cognitoAuthConfig = {
 createRoot(document.getElementById('root')!).render(
   //<StrictMode>
     <AuthProvider {...cognitoAuthConfig}>
-      <UserProvider>
-        <BrowserRouter>
+      <BrowserRouter>
+        <UserProvider>
           <ThemeProvider>
             <App />
           </ThemeProvider>
-        </BrowserRouter>
-      </UserProvider>
+        </UserProvider>
+      </BrowserRouter>
     </AuthProvider>
   //</StrictMode>
 )

@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useTheme } from "@hooks/useTheme";
-import { useUser, debugMode } from "@hooks/UserContext.tsx";
+import { useUser, debugMode } from "@/hooks/useUser";
 import { useAuth } from "react-oidc-context";
 
 import fallbackImg from "@assets/default-user.png"; // fallback image
@@ -22,7 +22,7 @@ function ProfilePanel({ onCancelClick }: ProfilePanelProp) {
 
   const navigate = useNavigate();
 
-  const { userData } = useUser();
+  const { userData, setAuthenticated, setLogoutInProgress } = useUser();
 
   const { isDark, toggleTheme } = useTheme();
 
@@ -35,7 +35,11 @@ function ProfilePanel({ onCancelClick }: ProfilePanelProp) {
 
 
   const handleLogout = () => {
+
     if (debugMode) {
+      setLogoutInProgress(true);
+      localStorage.setItem("loggedin", "false");
+      setAuthenticated(false);
       navigate("/")
     }
     else {

@@ -1,4 +1,4 @@
-import { debugMode } from "@hooks/UserContext.tsx";
+import { debugMode, useUser } from "@/hooks/useUser";
 import { Toaster, toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "react-oidc-context";
@@ -9,13 +9,18 @@ import '@pages/styles/Landing.css'
 
 function Landing() {
   const auth = useAuth();
+  const { setAuthenticated } = useUser();
   const navigate = useNavigate();
 
   const handleSignin = () => {
     try {
-      debugMode
-      ? navigate("/home")
-      : auth.signinRedirect()
+      if (debugMode) {
+        localStorage.setItem("loggedin", "true");
+        setAuthenticated(true);
+        navigate("/home")
+      }
+      else
+        auth.signinRedirect()
     }
     catch (error) {
       toast.error("Problem logging in");
@@ -24,9 +29,13 @@ function Landing() {
 
   const handleSignup = () => {
     try {
-      debugMode
-      ? navigate("/home")
-      : auth.signinRedirect({ prompt: "signup" })
+      if (debugMode) {
+        localStorage.setItem("loggedin", "true");
+        setAuthenticated(true);
+        navigate("/home")
+      }
+      else
+        auth.signinRedirect({ prompt: "signup" })
     }
     catch (error) {
       toast.error("Problem logging in");

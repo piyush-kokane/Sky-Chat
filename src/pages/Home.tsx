@@ -1,5 +1,5 @@
 import {  useState, useRef, useEffect  } from "react";
-import { useUser } from "@hooks/UserContext.tsx";
+import { useUser } from "@/hooks/useUser";
 import { useTheme } from "@hooks/useTheme";
 
 import ChatItem from '@components/ChatListItem'
