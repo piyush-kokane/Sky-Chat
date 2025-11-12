@@ -2,6 +2,7 @@ import {  useState, useRef, useEffect  } from "react";
 import { logedinAs, users, usersChatList } from "@/dataset/dataset"; 
 import { useUser } from "@hooks/UserContext.tsx";
 import { useTheme } from "@hooks/useTheme";
+import { useAuth } from "react-oidc-context";
 
 import ChatItem from '@components/ChatListItem'
 import NewChatPanel from '@/panel/NewChat'
@@ -14,23 +15,76 @@ import '@pages/styles/Home.css'
 
 
 function Home() {
+  const auth = useAuth();
+
   const { userData } = useUser();
 
-  const _chatList = usersChatList[logedinAs];
+  const [chatList, setChatList] = useState<any[]>([]);
 
 
-  // Add 'You' to chat list
-  const chatList = [
-    {
-      userImage: userData?.userImage,
-      userName: userData?.userName,
-      displayName: userData?.displayName + " (You)",
-      Text: "This is me !!!",
-      Time: "Now",
-      messageCount: 0,
-    },
-    ..._chatList,
-  ];
+  useEffect(() => {
+    if (!auth.isAuthenticated) return;
+
+    const fetchUsers = async () => {
+      try {
+        const res = await fetch(
+          "https://uqtbl5jiaf.execute-api.us-east-1.amazonaws.com/prod/users"
+        );
+        const data = await res.json();
+
+        let usersList: any[] = [];
+        if (typeof data.body === "string") {
+          usersList = JSON.parse(data.body);
+        } else if (Array.isArray(data.body)) {
+          usersList = data.body;
+        }
+
+        // Remove the logged-in user
+        usersList = usersList.filter((u) => u.email !== userData?.userName);
+
+        const formattedList = [
+          {
+            userImage: userData?.userImage,
+            userName: userData?.userName,
+            displayName: userData?.displayName + " (You)",
+            Text: "This is me !!!",
+            Time: "Now",
+            messageCount: 0,
+          },
+          ...usersList.map((u) => {
+            const email = u.email;
+            let userImage = "@assets/default-user.png"; // default image
+
+            if (email === "kaleonkaar@gmail.com")
+              userImage = "https://randomuser.me/api/portraits/men/1.jpg";
+            else if (email === "onkar.kale@mitwpu.edu.in")
+              userImage = "https://randomuser.me/api/portraits/men/2.jpg";
+            else if (email === "pjkokane21@gmail.com")
+              userImage = "https://randomuser.me/api/portraits/men/3.jpg";
+            else if (email === "moreadvait21@gmail.com")
+              userImage = "https://randomuser.me/api/portraits/men/4.jpg";
+
+            return {
+              userImage: u.userImage || userImage,
+              userName: email,
+              displayName: email?.split("@")[0],
+              Text: email,
+              Time: "Now",
+              messageCount: 0,
+            };
+          }),
+        ];
+
+
+        setChatList(formattedList);
+      } catch (err) {
+        console.error("Failed to fetch users:", err);
+      }
+    };
+
+    fetchUsers();
+  }, [auth.isAuthenticated, userData]);
+
 
   const { isDark, toggleTheme } = useTheme();
 
