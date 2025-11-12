@@ -90,7 +90,7 @@ const UserContext = createContext<UserContextType | undefined>(undefined);
 export const UserProvider = ({ children }: { children: ReactNode }) => {
   const location = useLocation();
 
-  const { user } = useAuth();
+  const auth = useAuth();
 
   const [isAuthenticated, setAuthenticated] = useState(localStorage.getItem("loggedin") === "true");
   const [isLoading, setLoading] = useState(false);
@@ -98,9 +98,20 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   const [userData, setUserData] = useState<UserData | null>(null);
 
 
+
   /* --- User Fetch --- */
   useEffect(() => {
-    if (!isAuthenticated) return;
+    if (!isAuthenticated) {
+      console.log("Removing user")
+
+      // remove user on logout
+      setUserData(null);
+      const theme = localStorage.getItem("theme");
+      localStorage.clear();
+      if (theme) localStorage.setItem("theme", theme);
+
+      return;
+    }
 
     // Debug Mode - load user from test database
     if (debugMode) {
@@ -115,8 +126,8 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     }
 
     // Normal Mode - fetch from Dynamo DB
-    if (isAuthenticated && user) {
-      const name = user.profile.name;
+    if (auth.user) {
+      const name = auth.user.profile.name;
 
       // *fetch data from database
 
@@ -128,15 +139,25 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         userContact: "",
       });
     }
-    else {
-      setUserData(null); // remove user data on logout
-    }
   }, [isAuthenticated]);
+
+
+  /* --- Sync isAuthenticated & localStorage with OIDC --- 
+  useEffect(() => {
+    if (auth.isAuthenticated) {
+      setAuthenticated(true);
+      localStorage.setItem("loggedin", "true");
+    } else {
+      setAuthenticated(false);
+      localStorage.removeItem("loggedin");
+    }
+  }, [auth.isAuthenticated]);*/
 
 
   /* --- logged out, reset flag --- */
   useEffect(() => {
     if (!isAuthenticated) {
+      console.log(logoutInProgress)
       setLogoutInProgress(false);
     }
   }, [isAuthenticated, location.pathname]);

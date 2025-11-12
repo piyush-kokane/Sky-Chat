@@ -21,6 +21,7 @@ function ProtectedRoute({ element }: { element: ReactElement }) {
 
   if (!isAuthenticated) {
     if (!logoutInProgress)
+      console.log(logoutInProgress)
       toast.error("Please Login first");
     return <Navigate to="/" replace />;
   }

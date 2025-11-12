@@ -1,3 +1,5 @@
+
+import { Toaster, toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useTheme } from "@hooks/useTheme";
@@ -38,18 +40,26 @@ function ProfilePanel({ onCancelClick }: ProfilePanelProp) {
 
   /* Logout function */
   const handleLogout = () => {
+    try {
+      // Debug mode (bypass OIDC)
+      if (debugMode) {
+        setLogoutInProgress(true);
+        console.log("true")
+        localStorage.setItem("loggedin", "false");
+        setAuthenticated(false);
+        navigate("/")
+        return;
+      }
 
-    if (debugMode) {
-      setLogoutInProgress(true);
-      localStorage.setItem("loggedin", "false");
-      setAuthenticated(false);
-      navigate("/")
-    }
-    else {
+      // OIDC normal flow
       const logoutUri = window.location.origin; // http://localhost:5173/
       const cognitoDomain = "https://us-east-1xillukbyv.auth.us-east-1.amazoncognito.com";
       auth.removeUser(); // remove tokens from localStorage
       window.location.href = `${cognitoDomain}/logout?client_id=1sel5r7k42ls80ubk82fsv5uel&logout_uri=${encodeURIComponent(logoutUri)}`;
+    }
+    catch (error) {
+      console.error("Logout failed:", error);
+      toast.error("Problem logging out");
     }
   };
 
@@ -57,6 +67,10 @@ function ProfilePanel({ onCancelClick }: ProfilePanelProp) {
   /* --- UI --- */
   return (
     <>
+      {/* Toaster */}
+      <Toaster position="top-center" reverseOrder={false} />
+
+
       {/* DP Panel */}
       {showDpPanel && 
         <DpDisplay 

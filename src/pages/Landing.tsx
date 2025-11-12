@@ -14,39 +14,46 @@ function Landing() {
 
 
   /* Signin function */
-  const handleSignin = () => {
+  const handleSignin = async () => {
     try {
+      // Debug mode (bypass OIDC)
       if (debugMode) {
         localStorage.setItem("loggedin", "true");
         setAuthenticated(true);
         navigate("/home")
+        return;
       }
-      else
-        auth.signinRedirect()
+
+      // OIDC normal flow
+      await auth.signinRedirect();
     }
     catch (error) {
+      console.error("Signin failed:", error);
       toast.error("Problem logging in");
     }
   };
 
 
   /* Signup function */
-  const handleSignup = () => {
+  const handleSignup = async () => {
     try {
       if (debugMode) {
         localStorage.setItem("loggedin", "true");
         setAuthenticated(true);
         navigate("/home")
+        return;
       }
-      else
-        auth.signinRedirect({ prompt: "signup" })
+
+      // OIDC normal flow
+      auth.signinRedirect({ prompt: "signup" })
     }
     catch (error) {
+      console.error("Signup failed:", error);
       toast.error("Problem logging in");
     }
   };
 
-  
+
 
   /* --- UI --- */
   return (

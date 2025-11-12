@@ -17,8 +17,8 @@ const cognitoAuthConfig = {
   redirect_uri: redirectUri,
   response_type: "code",
   scope: "openid email phone",
-  automaticSilentSignin: false, // important: don't redirect automatically
-  loadUserInfo: true,
+  //automaticSilentSignin: false, // important: don't redirect automatically
+  //loadUserInfo: true,
 };
 
 createRoot(document.getElementById('root')!).render(
